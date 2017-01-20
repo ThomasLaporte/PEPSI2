@@ -1,0 +1,3 @@
+// WOW
+
+new WOW().init();

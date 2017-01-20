@@ -1,0 +1,328 @@
+// out: style.css, sourcemap: true, compress: true
+
+//            1 - RESET
+//            2 - VAR
+//            3 - PERSO
+//                3.1 - GENERAL
+//                3.2 - HEADER
+//                  3.2.1 - NAV HORIZONTALE
+//                  3.2.2 - NAV VERTICALE
+//                3.3 - CONTENT
+//                3.4 - SIDEBAR
+//                3.5 - FOOTER
+//                3.6 - EXCEPTIONS
+//                3.7 - RESPONSIVE
+
+/*1 - RESET*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*2 - VAR*/
+
+@bg-color:#eee;
+@b:#000;
+@w:#fff;
+@g:#313131;
+
+@roboto:'Roboto', sans-serif;
+@regular:400;
+@thin:100;
+@bold:700;
+
+@sh1:50px;
+@sh2:30px;
+@sp:14px;
+
+@transition:all 0.25s ease-in-out;
+
+/*3 - PERSO*/
+
+/*3.1 - GENERAL*/
+
+body {
+    font-family: @roboto;
+    background: @bg-color;
+}
+
+/*3.2 - HEADER*/
+
+header {
+    width: 100%;
+    height: 150px;
+    background: @b;
+    margin-bottom: 50px;
+    
+    img {
+        
+    }
+}
+
+/*3.2.1 - NAV HORIZONTALE*/
+
+nav {
+  overflow : hidden;
+}
+
+nav input[type=checkbox] {
+  display : none;
+}
+
+menu {
+  position : relative;
+  transition  : all .4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+label {
+  position: relative;
+  z-index : 2;
+}
+
+li {
+  list-style-type: none;
+}
+
+.nav_horizontal_a , label {
+  display : block !important;
+  width   : auto  !important;
+  text-decoration : none;
+  background      : @b;
+  color   : #FFF;
+  padding : 20px 23px;
+}
+
+.nav_horizontal_a:after {
+  content : '';
+  position: absolute;
+  display : none;
+  font-size   : 18px;
+  line-height : 18px;
+  text-align : center;
+  color  : #fff;
+  text-shadow : none;
+  padding : 30px 20px;
+}
+
+
+li:hover .nav_horizontal_a:after {
+  display : block;
+}
+
+span {
+  display     : inline-block;
+  transition : all .4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.horizontal label {
+    float : left;
+}
+
+.horizontal menu {
+    float : left;
+    left  : -312px;
+}
+
+.horizontal li {
+  float : left;  
+}
+
+.horizontal label , .horizontal a {
+  border-right-color : rgba(255,255,255,0.1);  
+}
+
+.horizontal .nav_horizontal_a:after {
+  top     : 0;
+  left    : 100%;
+}
+
+#toggle:checked ~ menu {
+  left       : 0;
+  transition : left .4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+#toggle:checked ~ label span {
+  transform : rotate(-90deg);
+  transition : all .4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+/*3.2.2 - NAV VERTICALE*/
+
+/*3.3 - CONTENT*/
+
+.wrap {
+    max-width: 1220px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: @sh1;
+    font-weight: @thin;
+    color: @b;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.catalogue_products {
+    width: 100%;
+    height: auto;
+    margin: 50px auto;
+    display: flex;
+    
+    .catalogue_products_title {
+        width: 250px;
+        height: 320px;
+        padding-top: 30px;
+        padding-left: 20px;
+        background: @g;
+        margin-right: 70px;
+        
+        h2 {
+            font-size: @sh2;
+            font-weight: @bold;
+            color: @w;
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+    
+        p {
+            font-size: @sp;
+            color: @w;
+            max-width: 90%;
+            line-height: 1.25em;
+        }
+    }
+    
+    .catalogue_products_wrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        width: 70%;
+    }
+    
+    .catalogue_products_display {
+        width: 250px;
+        height: 350px;
+        margin-right: 50px;
+        
+        a {
+            width: 250px;
+            height: 175px;
+            display: block;
+            background-image: url("http://lorempixel.com/output/city-q-c-250-175-4.jpg");
+            -webkit-transition: @transition;
+            transition: @transition;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        
+        p {
+            font-size: @sp;
+            color: @b;
+        }
+        
+        .catalogue_products_display_details {
+            width: 250px;
+            height: 175px;
+            background: @w;
+            
+            .catalogue_products_display_details_title {
+                font-weight: @bold;
+                font-size: 16px;
+            }
+            
+            p {
+                padding: 20px 20px 0 20px;
+                line-height: 1.25em;
+            }
+        }
+    }
+}
+
+/*3.4 - SIDEBAR*/
+
+/*3.5 - FOOTER*/
+
+/*3.6 - EXCEPTIONS*/
+
+.catalogue_products .catalogue_products_display:last-child {
+    margin-right: 0;
+}
+
+.catalogue_products_display a:hover {
+    -webkit-transition: @transition;
+    transition: @transition;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 105%;
+}
+
+.catalogue_products_display_span_01 {
+    width: 0;
+    height: 0;
+}
+
+.catalogue_products_display_span_02 {
+    width: 0;
+    height: 0;
+}
+
+/*3.7 - RESPONSIVE*/
+
+@media screen and (max-width: 1229px) {
+    .catalogue_products_display:first-child {
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 881px) {
+    .catalogue_products_display {
+        margin-bottom: 50px;
+    }
+    .catalogue_products_display:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
