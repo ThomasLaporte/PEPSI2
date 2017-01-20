@@ -1,3 +1,4 @@
+<?php   include 'Class/Functions.php'; ?>
 <!doctype html>
 <html lang="fr">
   <head>
@@ -7,23 +8,32 @@
   </head>
   <body>
   <?php
-  include 'treatment.php';
+  $content = "";
 
-  echo "<h3>List of products</h3>";
-  echo "<table>";
+  $content .= "<h3>List of products</h3>";
+  $content .=  "<table>";
 
-  echo "<tr>"
-    echo "<th>Nom du produit</td>";
-    echo "<th></th>";
-  echo "</tr>";
-  foreach (echo getProducts() as $product) {
-    echo "<tr>"
-      echo "<td>".$product['nom']."</td>";
-      echo "<td><a href=modifProduct.php?product='".$product['id']."'>Modifier</a></td>";
-    echo "</tr>";
+  $content .=  "<tr>";
+    $content .=  "<th>Nom du produit</td>";
+    $content .=  "<th></th>";
+  $content .=  "</tr>";
+
+  $lstFunctions = new Functions();
+
+  foreach ($lstFunctions->getProducts() as $product) {
+    $content .= "<tr>";
+      $content .= "<td><a href=deleteProduct.php?product=".$product['id'].">-</a></td>";
+      $content .= "<td>". $product['name']. $product['id']."</td>";
+      $content .= "<td><a href=modifProduct.php?product=".$product['id'].">Modifier</a></td>";
+    $content .= "</tr>";
   }
-  echo "</table>";
 
+  $content .=  "</table>";
+$content .= "<a href=modifProduct.php?product='".  $product['id']."'>Ajouter produit</a>";
+
+
+
+echo $content;
   ?>
 
 
