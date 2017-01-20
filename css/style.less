@@ -98,6 +98,45 @@ header {
     }
 }
 
+.login {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    
+    a {
+        color: @w;
+        text-align: right;
+        text-decoration: none;
+    }
+    
+    .login_input {
+        display: none;
+        position: relative;
+    }
+}
+
+.input_visible {
+    display: block!important;
+    margin: 5px 0;
+    position: relative;
+    animation: login 0.25s ease-in-out;
+}
+
+@keyframes login {
+    0% {
+        opacity: 1;
+        right: -250px;
+    }
+    0% {
+        opacity: 0.25;
+        right: 25px;
+    }
+    100% {
+        opacity: 1;
+        right: 0;
+    }
+}
+
 /*3.2.1 - NAV HORIZONTALE*/
 
 nav {
