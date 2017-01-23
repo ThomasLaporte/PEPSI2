@@ -3,7 +3,7 @@
 class DbConnection {
     private $dsn = 'mysql:dbname=PEPSI2;host=127.0.0.1';
     private  $user = 'root';
-    private  $password = '0000';
+    private  $password = '';
     private $dbh = false;
 
     function __construct() {

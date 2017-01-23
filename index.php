@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-  <?php
-  $content = "";
+    <?php
+    $content = "";
+    $content .= "<ul>";
+     $content .= "<li><a href='#'>Articles</a></li>";
+     $content .= "<li><a href='#'>Utilisateurs</a></li>";
+     $content .= "<li><a href='#'>Wallah j'sais pas quoi</a></li>";
+    $content .= "</ul><br>";
 
-  $content .= "<h3>List of products</h3>";
+  $content .= "<br><h3>List of products</h3>";
   $content .=  "<table>";
 
   $content .=  "<tr>";
@@ -22,9 +27,9 @@
 
   foreach ($lstFunctions->getProducts() as $product) {
     $content .= "<tr>";
-      $content .= "<td><a href=deleteProduct.php?product=".$product['id'].">-</a></td>";
+      $content .= "<td><a href=deleteProduct.php?product=".$product['id_article'].">-</a></td>";
       $content .= "<td>". $product['name']."</td>";
-      $content .= "<td><a href=modifProduct.php?product=".$product['id'].">Modifier</a></td>";
+      $content .= "<td><a href=updateProduct.php?product=".$product['id_article'].">Modifier</a></td>";
     $content .= "</tr>";
   }
 
