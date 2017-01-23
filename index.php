@@ -23,13 +23,13 @@
   foreach ($lstFunctions->getProducts() as $product) {
     $content .= "<tr>";
       $content .= "<td><a href=deleteProduct.php?product=".$product['id'].">-</a></td>";
-      $content .= "<td>". $product['name']. $product['id']."</td>";
+      $content .= "<td>". $product['name']."</td>";
       $content .= "<td><a href=modifProduct.php?product=".$product['id'].">Modifier</a></td>";
     $content .= "</tr>";
   }
 
   $content .=  "</table>";
-$content .= "<a href=modifProduct.php?product='".  $product['id']."'>Ajouter produit</a>";
+$content .= "<a href=addProduct.php>Ajouter produit</a>";
 
 
 
