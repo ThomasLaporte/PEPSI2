@@ -42,9 +42,11 @@
       $content .= "</select>";
 
       $content .= "Catégorie: <select>";
-      foreach ($lstFunctions->getProductsCategs() as $categProduct) {
+      $test = $lstFunctions->getProductsCategs();
+      print_r($test);
 
-        $content .= "<option value=".$categProduct['id_article_category'].">".$categProduct['name']."</option>";
+      foreach ($lstFunctions->getProductsCategs() as $categProduct) {
+        $content .= "<option value=".!empty($categProduct['id_article_category']).">".$categProduct['name']."</option>";
       }
       $content .= "</select>";
 
