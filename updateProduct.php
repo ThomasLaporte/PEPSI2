@@ -13,18 +13,20 @@
     // Si l'utilisateur clic sur le bouton valider apres aviur fait ses modifications
     if(isset($_POST['productName']))
     {
+      echo $_POST['productPicture'];
           // Si l'update a été fonctionné
-         if($lstFunctions->updateProduct($_POST['productName'], $_POST['productPrice'])){
-
-         }
-         else {
-           # code...
-         }
+        //  if($lstFunctions->updateProduct($_POST['productName'], $_POST['productPrice'])){
+        //
+        //  }
+        //  else {
+        //    # code...
+        //  }
     }
 
 
     if(isset($_GET['product'])){
       $currentProduct = $lstFunctions->getProductByID($_GET['product']);
+      var_dump($currentProduct);
       $content = "<h1>Modification du produit</h1>";
       $content .= "<form method=\"post\">";
       $content .= "Nom du produit: <input type=\"text\" name=\"productName\" value=\"".  $currentProduct['name']."\"><br>";
@@ -33,7 +35,7 @@
       $content .= "Quantité:<input type=\"text\" name=\"productPrice\" value=\"".  $currentProduct['quantity'] ."\"><br>";
       $content .= "Poids (en Kg): <input type=\"text\" name=\"productName\" value=\"".  $currentProduct['weight'] ."\"><br>";
       $content .= "Dimensions:<input type=\"text\" name=\"productPrice\" value=\"".  $currentProduct['dimension'] ."\"><br>";
-      $content .= "Image: <input type=\"file\" name=\"productName\" value=\"".  $currentProduct['picture'] ."\"><br>";
+      $content .= "Image: <input type=\"file\" name=\"productPicture\" value=\"".  $currentProduct['picture'] ."\"><br>";
       $content .= "Fabricant: <select>";
       foreach ($lstFunctions->getManufacturers() as $manufacturer) {
         $isSelected = "";

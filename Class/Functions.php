@@ -35,6 +35,11 @@ Class Functions{
     return $this->products->productByID($id);
   }
 
+  function addProduct($name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ)
+  {
+    return $this->products->productByID($id);
+  }
+
   function getProductsCategs()
   {
     return $this->products->getCategProducts();
