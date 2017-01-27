@@ -37,7 +37,7 @@ Class Functions{
 
   function addProduct($name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ)
   {
-    return $this->products->productByID($id);
+    return $this->products->addProduct($name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ);
   }
 
   function getProductsCategs()

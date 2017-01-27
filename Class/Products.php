@@ -31,40 +31,45 @@ class Products {
           "reference = '". $ref ."',".
           "description = '". $desc ."',".
           "quantity = ". $quantity .",".
-          "weight = ". $weight ."f,".
+          "weight = ". $weight .",".
           "dimension = '". $dimension ."',".
           "picture = '". $picture ."',".
           "manufacturer_id_manufacturer = ".$manuId .",".
           "article_category_id_article_category = ".$idCateg .",".
           "WHERE id_article = ".$id;
-   $sth = $this->DB->query($sql);
+   $sth = $this->DB->Execute($sql);
    return true;
 
  }
 
  public function addProduct($name, $ref, $desc, $quantity, $weight, $dimension, $picture, $manuId, $idCateg)
  {
-   $sql = $sth->prepare("INSERT INTO article (name, reference, description, quantity, weight, dimension, picture, manufacturer_id_manufacturer, article_category_id_article_category) ".
-          "VALUES (name = :name,".
-          "reference = :ref,".
-          "description = :desc,".
-          "quantity = :quantity,".
-          "weight = :weight,".
-          "dimension = :dimension,".
-          "picture = :picture,".
-          "manufacturer_id_manufacturer = :manuId,".
-          "article_category_id_article_category = :idCateg)");
+   $sql = "INSERT INTO article (name, reference, description, quantity, weight, dimension, picture, manufacturer_id_manufacturer, article_category_id_article_category) ".
+          "VALUES (:name,:ref,:desc,:quantity,:weight,:dimension,:picture,:manuId,:idCateg)";
 
-    $sth->bindParam(':name', $name);
-    $sth->bindParam(':ref', $ref);
-    $sth->bindParam(':desc', $desc);
-    $sth->bindParam(':quantity', $quantity);
-    $sth->bindParam(':weight', $weight);
-    $sth->bindParam(':dimension', $dimension);
-    $sth->bindParam(':picture', $picture);
-    $sth->bindParam(':manuId', $manuId);
-    $sth->bindParam(':idCateg', $idCateg);
-   $sth = $this->DB->Execute($sql);
+  $array = array(
+    ':name' => $name,
+    ':ref' => $ref,
+    ':desc' => $desc,
+    ':quantity' => $quantity,
+    ':weight' => $weight,
+    ':dimension' => $dimension,
+    ':picture' => $picture,
+    ':manuId' => $manuId,
+    ':idCateg' => $idCateg
+);
+  $this->DB->query($sql, $array);
+    // $stmt->bindParam(':name', $name);
+    // $stmt->bindParam(':ref', $ref);
+    // $stmt->bindParam(':desc', $desc);
+    // $stmt->bindParam(':quantity', $quantity);
+    // $stmt->bindParam(':weight', $weight);
+    // $stmt->bindParam(':dimension', $dimension);
+    // $stmt->bindParam(':picture', $picture);
+    // $stmt->bindParam(':manuId', $manuId);
+    // $stmt->bindParam(':idCateg', $idCateg);
+
+  // $this->DB->query($sql,array);
    return true;
 
  }

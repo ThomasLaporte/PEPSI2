@@ -13,13 +13,14 @@
     // Si l'utilisateur clic sur le bouton valider apres aviur fait ses modifications
     if(isset($_POST['productName']) && $_POST['productName'] != "" && $_POST['productQuantity'])
     {
-      echo $_POST['productManufacturer'];
-         if($lstFunctions->addProduct($_POST['productName'], $_POST['productRef'], $_POST['productDesc'], $_POST['productQuantity'],$_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'],$_POST['productCateg'])){
-           echo "Ajout effectué avec succés";
-         }
-         else {
-           echo "Probleme rencontré lors de l'ajout du produit dans la bdd";
-         }
+      echo "TEST" . $lstFunctions->addProduct($_POST['productName'], $_POST['productRef'], $_POST['productDesc'], $_POST['productQuantity'],$_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'],1);
+        //  if($lstFunctions->addProduct($_POST['productName'], $_POST['productRef'], $_POST['productDesc'], $_POST['productQuantity'],$_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'],1)){ // $_POST['productCateg']
+        //    echo "Ajout effectué avec succés";
+        //  }
+        //  else {
+        //    echo "Probleme rencontré lors de l'ajout du produit dans la bdd";
+         //
+        //  }
     }
 
 
