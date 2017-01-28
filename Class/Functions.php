@@ -25,14 +25,14 @@ Class Functions{
     return $this->products->productByID($id);
   }
 
-  function updateProduct($id, $name, $price)
+  function updateProduct($id, $name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ)
   {
-    return $this->products->productByID($id);
+    return $this->products->updateProduct($id, $name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ);
   }
 
   function deleteProduct($id)
   {
-    return $this->products->productByID($id);
+    return $this->products->deleteProduct($id);
   }
 
   function addProduct($name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ)

@@ -26,19 +26,24 @@ class Products {
 
  public function updateProduct($id, $name, $ref, $desc, $quantity, $weight, $dimension, $picture, $manuId, $idCateg)
  {
-   $sql = "UPDATE article ".
-          "SET name = '". $name ."',".
-          "reference = '". $ref ."',".
-          "description = '". $desc ."',".
-          "quantity = ". $quantity .",".
-          "weight = ". $weight .",".
-          "dimension = '". $dimension ."',".
-          "picture = '". $picture ."',".
-          "manufacturer_id_manufacturer = ".$manuId .",".
-          "article_category_id_article_category = ".$idCateg .",".
-          "WHERE id_article = ".$id;
-   $sth = $this->DB->Execute($sql);
-   return true;
+   $sql = "UPDATE article SET name = :name, reference = :ref, description = :desc, quantity = :quantity, weight = :weight, ".
+          "dimension = :dimension, picture = :picture, manufacturer_id_manufacturer = :manuId, article_category_id_article_category = :idCateg ".
+          "WHERE id_article = :id";
+
+  $array = array(
+    ':name' => $name,
+    ':ref' => $ref,
+    ':desc' => $desc,
+    ':quantity' => $quantity,
+    ':weight' => $weight,
+    ':dimension' => $dimension,
+    ':picture' => $picture,
+    ':manuId' => $manuId,
+    ':idCateg' => $idCateg,
+    ':id' => $id);
+
+  $this->DB->query($sql, $array);
+  return true;
 
  }
 
@@ -56,30 +61,22 @@ class Products {
     ':dimension' => $dimension,
     ':picture' => $picture,
     ':manuId' => $manuId,
-    ':idCateg' => $idCateg
-);
-  $this->DB->query($sql, $array);
-    // $stmt->bindParam(':name', $name);
-    // $stmt->bindParam(':ref', $ref);
-    // $stmt->bindParam(':desc', $desc);
-    // $stmt->bindParam(':quantity', $quantity);
-    // $stmt->bindParam(':weight', $weight);
-    // $stmt->bindParam(':dimension', $dimension);
-    // $stmt->bindParam(':picture', $picture);
-    // $stmt->bindParam(':manuId', $manuId);
-    // $stmt->bindParam(':idCateg', $idCateg);
+    ':idCateg' => $idCateg);
 
-  // $this->DB->query($sql,array);
-   return true;
+  $this->DB->query($sql, $array);
+  return true;
 
  }
 
  public function deleteProduct($id)
  {
-   $sql = "DELETE FROM article WHERE id_article='".$id."'";
-   $sth = $this->DB->query($sql);
-   return true;
+   $sql = "DELETE FROM article WHERE id_article= :id LIMIT 1";
 
+   $array = array(
+     ':id' => $id);
+
+   $this->DB->query($sql, $array);
+   return true;
  }
 
 public function getCategProducts()
