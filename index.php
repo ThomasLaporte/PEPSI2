@@ -11,8 +11,7 @@
     $content = "";
     $content .= "<ul>";
      $content .= "<li><a href='#'>Articles</a></li>";
-     $content .= "<li><a href='#'>Utilisateurs</a></li>";
-     $content .= "<li><a href='#'>Wallah j'sais pas quoi</a></li>";
+     $content .= "<li><a href='Manufacturer/lstManufacturers.php'>Fabricants</a></li>";
     $content .= "</ul><br>";
 
   $content .= "<br><h3>List of products</h3>";

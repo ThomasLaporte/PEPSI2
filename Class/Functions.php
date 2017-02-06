@@ -51,4 +51,9 @@ Class Functions{
     return $this->manufacturers->listManufacturers();
   }
 
+  function addManufacturer($name, $adress, $postal, $city, $country)
+  {
+    return $this->products->addManufacturer($name, $adress, $postal, $city, $country);
+  }
+
 }
