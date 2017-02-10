@@ -28,7 +28,7 @@ class Products {
  {
    $sql = "UPDATE article SET name = :name, reference = :ref, description = :desc, quantity = :quantity, weight = :weight, ".
           "dimension = :dimension, picture = :picture, manufacturer_id_manufacturer = :manuId, article_category_id_article_category = :idCateg ".
-          "WHERE id_article = :id";
+          "WHERE id_article = :id LIMIT 1";
 
   $array = array(
     ':name' => $name,

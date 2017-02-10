@@ -53,7 +53,12 @@ Class Functions{
 
   function addManufacturer($name, $adress, $postal, $city, $country)
   {
-    return $this->products->addManufacturer($name, $adress, $postal, $city, $country);
+    return $this->manufacturers->addManufacturer($name, $adress, $postal, $city, $country);
+  }
+
+  function deleteManufacturer($id)
+  {
+    return $this->manufacturers->deleteManufacturer($id);
   }
 
 }

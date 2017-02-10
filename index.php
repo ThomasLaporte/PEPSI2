@@ -1,4 +1,4 @@
-<?php   include 'Class/Functions.php'; ?>
+<?php include "Class/Functions.php"; ?>
 <!doctype html>
 <html lang="fr">
   <head>

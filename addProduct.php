@@ -34,17 +34,30 @@
     foreach ($lstFunctions->getManufacturers() as $manufacturer) {
       $content .= "<option value=\"".$manufacturer['id_manufacturer']."\">".$manufacturer['name']."</option>";
     }
-    $content .= "</select>";
+    $content .= "</select></br>";
 
-    $content .= "Catégorie: <select name=\"productCateg\">";
+    // $content .= "Catégorie: <select name=\"productCateg\">";
+    // foreach ($lstFunctions->getProductsCategs() as $categProduct) {
+    //   $content .= "<option value=\"".$categProduct['id_article_category']."\">".$categProduct['name']."</option>";
+    // }
+    //
+    // $content .= "</select> <br>";
+
+    // Ajout datalist
+    $content .= "Catégorie: <input list=\"productCateg\">\"<datalist id=\"productCateg\">";
     foreach ($lstFunctions->getProductsCategs() as $categProduct) {
-
-      $content .= "<option value=\"".$categProduct['id_article_category']."\">".$categProduct['name']."</option>";
+      $content .= "<option id=\"".$categProduct['id_article_category'] ."\" value=\"".$categProduct['name']."\"></option>";
     }
-    $content .= "</select><br>";
+        // <option value="Internet Explorer">
+        // <option value="Firefox">
+        // <option value="Chrome">
+        // <option value="Opera">
+        // <option value="Safari">
+      $content .= "</datalist></br>";
 
-    $content .="<input type=\"submit\" value=\"Submit\">";
-    $content .="</form>";
+    // $content .= "<input id=\"addCategProduct\" type=\"text\"><a href=\"http://192.168.33.10/CategArticle/addCategArticle.php\">Ajouter catégorie</a></input>";
+    $content .= "<input type=\"submit\" value=\"Submit\">";
+    $content .= "</form>";
     echo $content;
 
     ?>

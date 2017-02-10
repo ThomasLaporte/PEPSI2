@@ -10,7 +10,7 @@
     <?php
     $content = "";
     $content .= "<ul>";
-     $content .= "<li><a href='index.php'>Articles</a></li>";
+     $content .= "<li><a href='http://192.168.33.10'>Articles</a></li>";
      $content .= "<li><a href='#'>Fabricants</a></li>";
     $content .= "</ul><br>";
 
@@ -26,18 +26,16 @@
 
   foreach ($lstFunctions->getManufacturers() as $manufacturer) {
     $content .= "<tr>";
-      $content .= "<td><a href=deleteProduct.php?product=".$manufacturer['id_manufacturer'].">-</a></td>";
+      $content .= "<td><a href=deleteManufacturer.php?manufacturer=".$manufacturer['id_manufacturer'].">-</a></td>";
       $content .= "<td>". $manufacturer['name']."</td>";
       $content .= "<td><a href=updateProduct.php?product=".$manufacturer['id_manufacturer'].">Modifier</a></td>";
     $content .= "</tr>";
   }
 
   $content .=  "</table>";
-$content .= "<a href=addProduct.php>Ajouter fabricant</a>";
-
-
-
-echo $content;
+  $content .= "<a href=addManufacturer.php>Ajouter fabricant</a>";
+  
+  echo $content;
   ?>
 
 

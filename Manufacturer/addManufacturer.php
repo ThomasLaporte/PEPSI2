@@ -10,10 +10,10 @@
     <?php
     $lstFunctions = new Functions();
 
-    // Si l'utilisateur clic sur le bouton valider apres aviur fait ses modifications
-    if(isset($_POST['productName']) && $_POST['productName'] != "" && $_POST['productQuantity'])
+    // Si l'utilisateur clic sur le bouton valider apres avoir fait ses modifications
+    if(isset($_POST['manufacturerName']))
     {
-       if($lstFunctions->addManufacturer($_POST['productName'], $_POST['productRef'], $_POST['productDesc'], $_POST['productQuantity'],$_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'], $_POST['productCateg'])){ // $_POST['productCateg']
+       if($lstFunctions->addManufacturer($_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'],$_POST['manufacturerCountry'])){ // $_POST['productCateg']
          ?> <script>alert("Ajout effectué avec succés ! ");</script><?php
        }
        else {

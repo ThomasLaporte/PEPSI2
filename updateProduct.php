@@ -26,7 +26,7 @@
       $currentProduct = $lstFunctions->getProductByID($_GET['product']);
 
       $content = "<h1>Modification du produit</h1>";
-      $content .= "<a href=\"http://127.0.0.1/PEPSI2-backoffice\">Accueil</a>";
+      $content .= "<a href=\"http://192.168.33.10\">Accueil</a>";
       $content .= "<form method=\"post\">";
       $content .= "Nom du produit: <input type=\"text\" name=\"productName\" value=\"". $currentProduct['name']."\"><br>";
       $content .= "Réference:<input type=\"text\" name=\"productRef\" value=\"". $currentProduct['reference'] ."\"><br>";
@@ -56,7 +56,7 @@
       echo $content;
     }
   else {
-    header("Location:http://127.0.0.1/PEPSI2-backoffice");
+    //header("Location:http://127.0.0.1/PEPSI2-backoffice");
   } ?>
   </body>
 </html>
