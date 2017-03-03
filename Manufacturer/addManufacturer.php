@@ -13,12 +13,15 @@
     // Si l'utilisateur clic sur le bouton valider apres avoir fait ses modifications
     if(isset($_POST['manufacturerName']))
     {
-       if($lstFunctions->addManufacturer($_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'],$_POST['manufacturerCountry'])){ // $_POST['productCateg']
-         ?> <script>alert("Ajout effectué avec succés ! ");</script><?php
-       }
-       else {
-         echo "Probleme rencontré lors de l'ajout du produit dans la bdd";
-       }
+      echo "Name :" .$_POST['manufacturerName'];
+      echo "Adrs :" .$_POST['manufacturerAdress'];
+      print_r($lstFunctions->addManufacturer($_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'],$_POST['manufacturerCountry']));
+      //  if(return $lstFunctions->addManufacturer($_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'],$_POST['manufacturerCountry'])){ // $_POST['productCateg']
+      //    ?> <script>alert("Ajout effectué avec succés ! ");</script><?php
+      //  }
+      //  else {
+      //    echo "Probleme rencontré lors de l'ajout du produit dans la bdd";
+      //  }
     }
 
     $content = "<h1>Ajout d'un nouveau Fournisseur</h1>";

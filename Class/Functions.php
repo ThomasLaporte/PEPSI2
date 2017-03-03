@@ -35,15 +35,13 @@ Class Functions{
     return $this->products->deleteProduct($id);
   }
 
-  function addProduct($name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ)
+  function addProduct($name, $ref, $quantity, $weight, $dim, $pict, $manuId, $categ)
   {
-    return $this->products->addProduct($name, $ref, $desc, $quantity, $weight, $dim, $pict, $manuId, $categ);
+    $idArticle = $this->products->addProduct($name, $ref, $quantity, $weight, $dim, $pict, $manuId, $categ);
+    $this->products->addCharacteristic($idArticle); // Id Article
   }
 
-  function getProductsCategs()
-  {
-    return $this->products->getCategProducts();
-  }
+
 
   // Fournisseurs
   function getManufacturers()
@@ -53,6 +51,7 @@ Class Functions{
 
   function addManufacturer($name, $adress, $postal, $city, $country)
   {
+
     return $this->manufacturers->addManufacturer($name, $adress, $postal, $city, $country);
   }
 
@@ -60,5 +59,30 @@ Class Functions{
   {
     return $this->manufacturers->deleteManufacturer($id);
   }
+
+  // Categorie article
+  function addArticleCategorie($name, $code, $idLanguage)
+  {
+    return $this->products->addArticleCateg($name, $code, $idLanguage);
+  }
+
+  function getMaxCodeFromCategProd()
+  {
+    return $this->products->getLastCodeFromCategProd();
+  }
+
+  function getProductsCategs()
+  {
+    return $this->products->getCategProducts();
+  }
+  function getProductsCategsByLang($language)
+  {
+    return $this->products->getProductsCategsByLang($language);
+  }
+
+  function getLanguages(){
+    return $this->products->listLanguages();
+  }
+
 
 }

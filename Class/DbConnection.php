@@ -1,7 +1,7 @@
 <?php
 
 class DbConnection {
-    private $dsn = 'mysql:dbname=PEPSI2;host=192.168.33.10';
+    private $dsn = 'mysql:dbname=PEPSI2;host=127.0.0.1';
     private  $user = 'admin';
     private  $password = '1234';
     private $dbh = false;
@@ -22,6 +22,7 @@ class DbConnection {
 
     public function query($stat, $arg = false)
     {
+      try {
         if (!$this->dbh) {
             $this->dbConect();
         }
@@ -31,10 +32,14 @@ class DbConnection {
             }
             $req = $this->dbh->prepare($stat);
             $req->execute($arg);
+            return $this->dbh->lastInsertId();
         } else {
             $req = $this->dbh->query($stat);
         }
         return $req;
+      } catch (PDOException $e) {
+        die('Problème rencontré lors de l execution de la requete : ' . $e->getMessage());
+      }
     }
 
 }

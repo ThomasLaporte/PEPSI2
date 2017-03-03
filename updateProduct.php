@@ -1,13 +1,6 @@
-<?php   include 'Class/Functions.php'; ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> Modifier produit </title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-  <body>
-    <?php
+<?php include "Class/Functions.php";
+
+    require_once "header.php";
     $lstFunctions = new Functions();
 
     if(isset($_GET['product'])){

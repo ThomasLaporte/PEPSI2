@@ -1,24 +1,14 @@
-<?php include "Class/Functions.php"; ?>
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Index</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <?php
+<?php include "Class/Functions.php";
+
+    require_once "header.php";
     $content = "";
-    $content .= "<ul>";
-     $content .= "<li><a href='#'>Articles</a></li>";
-     $content .= "<li><a href='Manufacturer/lstManufacturers.php'>Fabricants</a></li>";
-    $content .= "</ul><br>";
+
 
   $content .= "<br><h3>List of products</h3>";
   $content .=  "<table>";
 
   $content .=  "<tr>";
-    $content .=  "<th>Nom du produit</td>";
+    $content .=  "<th>Product Name</td>";
     $content .=  "<th></th>";
   $content .=  "</tr>";
 

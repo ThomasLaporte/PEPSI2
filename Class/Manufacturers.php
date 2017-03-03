@@ -20,7 +20,7 @@ class Manufacturers {
      try {
 
        $sql = "INSERT INTO manufacturer (name, adress, postal_code, city, country) ".
-              "VALUES (:name,:adress,:postalCode,:city,:country)";
+              "VALUES (:name, :adress, :postalCode, :city, :country)";
 
       $array = array(
         ':name' => $name,
@@ -29,8 +29,8 @@ class Manufacturers {
         ':city' => $city,
         ':country' => $country);
 
-      $this->DB->query($sql, $array);
-      return true;
+      return $this->DB->query($sql, $array);
+
     } catch (Exception $e) {
         echo "Une erreur a été rencontrée lors de l'ajout dans la base de donnée." . $e;
     }
