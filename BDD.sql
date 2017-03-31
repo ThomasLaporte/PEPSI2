@@ -102,7 +102,8 @@ COLLATE = utf8_unicode_ci;
 -- Table `Price`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Price` (
-  `Price` INT(11) NOT NULL,
+  `fixe` FLOAT NOT NULL,
+  `pourcentage` FLOAT NOT NULL,
   `article_id_article` INT(11) NOT NULL,
   `customer_id_customer` INT(11) NOT NULL,
   PRIMARY KEY (`article_id_article`, `customer_id_customer`),
@@ -170,8 +171,8 @@ CREATE TABLE IF NOT EXISTS `customer_adress` (
   `adress` VARCHAR(80) CHARACTER SET 'utf8' NOT NULL,
   `postal_code` INT(11) NOT NULL,
   `city` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
-  `longitude` FLOAT NULL DEFAULT NULL,
-  `latitude` FLOAT NULL DEFAULT NULL,
+  `longitude` VARCHAR(50) NULL DEFAULT NULL,
+  `latitude` VARCHAR(50) NULL DEFAULT NULL,
   `country` INT(5) NOT NULL,
   `type_adress_id_type_address` INT(11) NOT NULL,
   `customer_id_customer` INT(11) NOT NULL,
