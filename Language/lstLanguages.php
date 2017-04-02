@@ -5,7 +5,7 @@
   $content = "";
   $lstFunctions = new Functions();
 
-  if(isset($_POST['addLanguage'])) // si il existe et n'est pas vide
+  if(isset($_POST['addLanguage']) && strlen($_POST['addLanguage']) > 0) // si il existe et n'est pas vide
   {
       $lstFunctions->addLanguage($_POST['addLanguage']);
       unset($_POST['addLanguage']);

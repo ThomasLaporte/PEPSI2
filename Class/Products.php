@@ -92,7 +92,7 @@ class Products {
      }
 
      public function deleteCharacteristic($articleId){
-       $sql = "DELETE FROM characteristics WHERE id_article= :id";
+       $sql = "DELETE FROM characteristics WHERE article_id_article = :id";
 
        $array = array(
          ':id' => $articleId);
@@ -101,21 +101,15 @@ class Products {
      }
 
      public function updateCharacteristic($articleId, $desc, $spec, $idLanguage){
-       $sql = "UPDATE characteristics SET description= :desc, specification= :spec WHERE article_id_article= :articleId AND language_idlanguage= :idLanguage LIMIT 1";
-
-       echo $articleId;
-       echo $desc;
-       echo $spec;
-       echo $idLanguage;
+       $sql = "UPDATE characteristics SET description = :desc, specification = :spec WHERE article_id_article = :articleId AND language_idlanguage = :idLanguage LIMIT 1";
 
       $array = array(
-        ':desc' => $articleId,
-        ':spec' => $desc,
-        ':articleId' => $spec,
+        ':desc' => $desc,
+        ':spec' => $spec,
+        ':articleId' => $articleId,
         ':idLanguage' => $idLanguage);
 
       return $this->DB->query($sql, $array);
-
      }
 
      public function getCharacteristicsByIdArticle($idArticle)

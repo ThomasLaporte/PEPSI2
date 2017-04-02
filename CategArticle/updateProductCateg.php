@@ -13,13 +13,12 @@
 
         // Parcours des champs pour enregistrer les modifications
         foreach ($currentCateg as $categ) {
-          if(isset($_POST["categName". $categ['code']]) && strlen($_POST["categName". $categ['code']]) > 0)
-          {
-            $lstFunctions->updateProductCateg($_GET['categ'], $_POST["categName". $categ['language_idlanguage']], $categ['language_idlanguage'], $_POST["categDesc". $categ['language_idlanguage']]);
-          }
-          else {
-            ?> <script>alert("Veuillez renseigner le champ nom de la catégorie ! ");</script> <?php
-          }
+          // if(isset($_POST["categName". $categ['code']]) && strlen($_POST["categName". $categ['code']]) > 0)
+          // {
+
+            $test = $lstFunctions->updateProductCateg($_GET['categ'], $_POST["categName". $categ['language_idlanguage']], $categ['language_idlanguage'], $_POST["categDesc". $categ['language_idlanguage']]);
+        //  }
+
 
         }
         ?> <script>alert("Mise(s) à jour terminée(s) ! ");

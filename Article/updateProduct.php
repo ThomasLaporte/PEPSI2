@@ -5,27 +5,31 @@
 
     if(isset($_GET['product'])){
 
+      $currentProduct = $lstFunctions->getProductByID($_GET['product']);
+      $currentCharacteristics = $lstFunctions->getCharacteristicsByIdArticle($_GET['product']);
+
       // Si l'utilisateur clic sur le bouton valider apres aviur fait ses modifications
       if(isset($_POST['productName']) && $_POST['productName'] != "" && $_POST['productQuantity'])
       {
          $lstFunctions->updateProduct($_GET['product'], $_POST['productName'], $_POST['productRef'],  $_POST['productQuantity'], $_POST['productPrice'], $_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'], $_POST['productCateg'], '1');// $_POST['productCateg']
 
          foreach ($lstFunctions->getLanguages() as $language) {
-          //  echo "id:".$_GET['product']."<br>";
-          //  echo "desc:".$_POST["productDesc".$language['idlanguage']]."<br>";
-          //  echo "spec:".$_POST["productSpec".$language['idlanguage']]."<br>";
-          //  echo "lId:".$language['idlanguage']."<br>";
-          $lstFunctions->updateCharacteristic($_GET['product'], $_POST["productDesc".$language['idlanguage']], $_POST["productSpec".$language['idlanguage']], $language['idlanguage']);
-         }
 
+           // Si des caracteristiques existent : on modifie sinon on en créer
+           if(count($currentCharacteristics) > 0){
+             $lstFunctions->updateCharacteristic($_GET['product'], $_POST["productDesc".$language['idlanguage']], $_POST["productSpec".$language['idlanguage']], $language['idlanguage']);
+           }
+           else {
+             $lstFunctions->addCharacteristic($_GET['product'], $_POST["productDesc".$language['idlanguage']], $_POST["productSpec".$language['idlanguage']], $language['idlanguage'] );
+           }
+         }
+         header("Location: lstArticles.php");
       }
 
-      $currentProduct = $lstFunctions->getProductByID($_GET['product']);
-      $currentCharacteristics = $lstFunctions->getCharacteristicsByIdArticle($_GET['product']);
+
 
 
       $content = "<h1>Modification du produit</h1>";
-      //$content .= "<a href=\"http://192.168.33.10\">Accueil</a>";
       $content .= "<form method=\"post\">";
 
       $content .= "Nom du produit: <input type=\"text\" name=\"productName\" value=\"". $currentProduct['name']."\"><br>";
@@ -54,10 +58,17 @@
 
 
       foreach ($lstFunctions->getLanguages() as $language) {
-          $currentChar = $currentCharacteristics[array_search($language['idlanguage'], array_column($currentCharacteristics, 'language_idlanguage'))];
+          $specification = "";
+          $description = "";
 
-          $content .= $language['name']." description: <textarea rows=\"4\" cols=\"50\" name=\"productDesc".$language['idlanguage']."\">".$currentChar['description']."</textarea><br><br>";
-          $content .= $language['name']." specification: <textarea rows=\"4\" cols=\"50\" name=\"productSpec".$language['idlanguage']."\">".$currentChar['specification']."</textarea><br>";
+          if(count($currentCharacteristics)>0){
+            $currentChar = $currentCharacteristics[array_search($language['idlanguage'], array_column($currentCharacteristics, 'language_idlanguage'))];
+            $description = $currentChar['description'];
+            $specification = $currentChar['specification'];
+          }
+
+          $content .= $language['name']." description: <textarea rows=\"4\" cols=\"50\" name=\"productDesc".$language['idlanguage']."\">".$description."</textarea><br><br>";
+          $content .= $language['name']." specification: <textarea rows=\"4\" cols=\"50\" name=\"productSpec".$language['idlanguage']."\">".$specification."</textarea><br>";
           $content .="<hr>";
       }
 
@@ -66,7 +77,7 @@
       echo $content;
     }
   else {
-    //header("Location:http://127.0.0.1/PEPSI2-backoffice");
+    header("Location: lstArticles.php");
   } ?>
   </body>
 </html>

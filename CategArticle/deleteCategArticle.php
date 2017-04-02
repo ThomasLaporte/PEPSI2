@@ -10,9 +10,8 @@
       }
       else {
         $lstFunctions->deleteProductCateg($_GET['categ']);
+        header("Location: lstArticleCateg.php");
       }
-      echo count($articlesCateg);
-      var_dump($articlesCateg);
 
       //echo $lstFunctions->deleteProductCateg($_GET['categ']);
       // $lstFunctions->deleteProductCateg($_GET['categ']);

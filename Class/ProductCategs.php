@@ -71,7 +71,7 @@ class ProductCategs {
 
    public function updateProductCateg($id, $name, $idLanguage, $description)
    {
-     $sql = "UPDATE article_category SET name = :name, language_idlanguage = :languageId, description = :desc ".
+     $sql = "UPDATE article_category SET name = :name, description = :desc ".
             "WHERE code = :id AND language_idlanguage = :languageId LIMIT 1";
 
     $array = array(

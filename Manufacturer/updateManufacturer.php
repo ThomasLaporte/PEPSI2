@@ -11,10 +11,10 @@
           $lstFunctions->updateManufacturer($_GET['manufacturer'], $_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'], $_POST['manufacturerCountry']);
           header("Location: lstManufacturers.php");
       }
-      else {
-        ?> <script>alert("Veuillez renseigner l'ensemble des champs ! ");</script> <?php
-        unset($_POST['manufacturerName']);
-      }
+      // else {
+      //    <script>alert("Veuillez renseigner l'ensemble des champs ! ");</script> <?php
+      //   unset($_POST['manufacturerName']);
+      // }
 
       $currentManufacturer = $lstFunctions->getManufacturerById($_GET['manufacturer']);
 
@@ -37,6 +37,9 @@
       $content .="<input type=\"submit\" value=\"Valider\">";
       $content .="</form>";
       echo $content;
+    }
+    else {
+      header("Location: lstManufacturers.php");
     }
     ?>
 
