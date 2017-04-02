@@ -4,6 +4,7 @@ require_once("Products.php");
 require_once("Manufacturers.php");
 require_once("ProductCategs.php");
 require_once("Languages.php");
+require_once("Customers.php");
 
 Class Functions{
   // Instanciation de la connexion à la BDD
@@ -12,6 +13,7 @@ Class Functions{
   private $manufacturers;
   private $productCategs;
   private $languages;
+  private $customers;
 
   function __construct(){
     $this->_DB = new DbConnection();
@@ -19,6 +21,7 @@ Class Functions{
     $this->manufacturers = new Manufacturers($this->_DB);
     $this->productCategs = new ProductCategs($this->_DB);
     $this->languages = new Languages($this->_DB);
+    $this->customers = new Customers($this->_DB);
   }
 
   // Produits
@@ -164,6 +167,16 @@ Class Functions{
   function getLanguageByIdBis($id)
   {
     return $this->languages->getLanguageById($id);
+  }
+
+  function getCustomers()
+  {
+    return $this->customers->getCustomers();
+  }
+
+  function getCustomerById($id)
+  {
+    return $this->customers->getCustomerById($id);
   }
 
 }
