@@ -32,11 +32,8 @@ include 'header.php';
     
 </div>
     
-<footer>
-</footer>
+<?php
 
-</body>
-    
-    <script src="js/script.js"></script>
-    
-</html>
+include 'footer.php';
+
+?>

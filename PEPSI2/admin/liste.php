@@ -1,18 +1,18 @@
 <?php
 
-$title_page = 'Spectasonic - Catalogue';
+$title_page = 'Spectasonic - XXX';
 include 'header.php';
 
 ?>
 
 <div class="wrap">
     
-<h1 class="wow fadeIn">Catalogue</h1>
+<h1 class="wow fadeIn">XXX</h1>
     
 <section class="catalogue_products wow fadeInUp">
     <article class="catalogue_products_title">
-        <h2 id="cables">Cables audios</h2>
-        <p>Les cables Spectasonic, ainsi que ceux fabriqués par nos confrères et disponibles sur notre site, ont été rigoureusement testé par nos techniciens avant leur commercialisation.<br><br>Ils fournissent la qualité optimale sans nécessairement alourdir votre budget hifi.</p>
+        <h2 id="cables">XXX</h2>
+        <p>Consultez et modifiez la liste de XXX</p>
     </article>
     <div class="catalogue_products_wrap">
     <article class="catalogue_products_display">
@@ -36,75 +36,45 @@ include 'header.php';
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>
-    </div>
-</section>
-    
-<section class="catalogue_products wow fadeInUp">
-    <article class="catalogue_products_title">
-        <h2 id="enceinte">Enceinte HIFI</h2>
-        <p>Que ce soit pour de la Haute Fidélité ou dans une configuration Home Cinéma, le choix des enceintes est tout simplement primordial.<br><br>Sans écarter l'idée de les associer à d'autres composants électroniques (en particulier l'amplificateur), tous les spécialistes sont unanimes : les enceintes ont une durée de vie optimale.</p>
-    </article>
-    <div class="catalogue_products_wrap">
-    <article class="catalogue_products_display">
+        <article class="catalogue_products_display">
         <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="catalogue_products_display_details">
-            <p class="catalogue_products_display_details_title">KUB</p>
+            <p class="catalogue_products_display_details_title">Cable RCA 12 ANTHEM (long)</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>
-    <span class="catalogue_products_display_span_02"></span>
     <article class="catalogue_products_display">
         <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="catalogue_products_display_details">
-            <p class="catalogue_products_display_details_title">ALBATOR</p>
+            <p class="catalogue_products_display_details_title">Cable RCA 12 ANTHEM (long)</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>
-    </div>
-</section>
-    
-<section class="catalogue_products wow fadeInUp">
-    <article class="catalogue_products_title">
-        <h2 id="ampli">Amplificateurs</h2>
-        <p>La réputation de notre gamme d'amplificateurs n'est plus à démontrer. Elle a marqué le siècle dernier et aborde le nouveau avec optimisme !<br><br>Vous êtes un(e) puriste, un(e) passionné(e)? Rejoignez la communauté des passionnés de la HIFI à son plus haut niveau et goûtez à l'essence même du son le plus parfait.</p>
-    </article>
-    <div class="catalogue_products_wrap">
     <article class="catalogue_products_display">
         <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="catalogue_products_display_details">
-            <p class="catalogue_products_display_details_title">SPECTALIZER</p>
+            <p class="catalogue_products_display_details_title">Cable RCA 12 ANTHEM (long)</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>
-    <span class="catalogue_products_display_span_02"></span>
     <article class="catalogue_products_display">
         <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="catalogue_products_display_details">
-            <p class="catalogue_products_display_details_title">SPECTALIZER III</p>
+            <p class="catalogue_products_display_details_title">Cable RCA 12 ANTHEM (long)</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>
-    </div>
-</section>
-    
-<section class="catalogue_products wow fadeInUp">
-    <article class="catalogue_products_title">
-        <h2 id="lampes">Lampes</h2>
-        <p>Les lampes d'amplificateurs ont une certaine durée de vie. Nous vous proposons de bénéficier d'une sélection de lampes définie par nos experts en fonction de leur rapport qualité / prix.<br><br>Nous nous employons à sortir des sentiers battus et notre catalogue de lampes réserve quelques agréables surprises que nous avons dénichées pour vous.</p>
-    </article>
-    <div class="catalogue_products_wrap">
     <article class="catalogue_products_display">
         <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="catalogue_products_display_details">
-            <p class="catalogue_products_display_details_title">Lampe Sovtek 12AX7WA</p>
+            <p class="catalogue_products_display_details_title">Cable RCA 12 ANTHEM (long)</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>
-    <span class="catalogue_products_display_span_02"></span>
     <article class="catalogue_products_display">
         <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="catalogue_products_display_details">
-            <p class="catalogue_products_display_details_title">Lampe Sovtek 6550WE</p>
+            <p class="catalogue_products_display_details_title">Cable RCA 12 ANTHEM (long)</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus convallis interdum. Quisque tincidunt sed  urna &hellip; <a href="article.php">Lire la suite</a></p>
         </div>
     </article>

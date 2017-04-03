@@ -20,10 +20,10 @@ include 'header.php';
     <article class="panier_products_display">
             <ul>
             <li>Total HT<span class="prix_HT">XXX €</span></li>
-            <li>Produit 01<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li>Produit 02<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li>Produit 03<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li>Produit 04<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
+            <li class="prix_li">Produit 01<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
+            <li class="prix_li">Produit 02<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
+            <li class="prix_li">Produit 03<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
+            <li class="prix_li">Produit 04<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
             <li>Total TTC<span class="prix_TTC">XXX €</span></li>
             </ul>
             <button>Payer</button>
@@ -33,11 +33,8 @@ include 'header.php';
     
 </div>
     
-<footer>
-</footer>
+<?php
 
-</body>
-    
-    <script src="js/script.js"></script>
-    
-</html>
+include 'footer.php';
+
+?>

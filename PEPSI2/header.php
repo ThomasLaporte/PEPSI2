@@ -13,7 +13,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -23,24 +23,43 @@
 <body id="top">
     
 <header class="wow fadeInDown">
-    <a href="#" class="logo"><img src="img/logo.png"/></a>
+    <a href="index" class="logo"><img src="img/logo.png"/></a>
 
 <nav class="horizontal">
-    <input type="checkbox" id="toggle" />
-        <label for="toggle">
-            <span class="fa fa-bars"></span>
-        </label>
-    <menu class="cover">
-        <li><a class="nav_horizontal_a" href="index.php">Catalogue</a></li>
-        <li><a class="nav_horizontal_a" href="panier.php">Panier</a></li>
-        <li><a class="nav_horizontal_a" href="ou-acheter.php">Où acheter</a></li>
-    </menu>
+    <a href="javascript:void(0);" class="js-modal-close_login" id="open_menu"><i class="fa fa-bars"></i></a>
+    <a href="javascript:void(0);" class="js-modal-close_login" id="open_login"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 </nav>
     
-<div class="login">
-    <a href="#" class="login_a">Connexion</a>
-    <input type="text" name="id" id="id" class="login_input">
-    <input type="text" name="mdp" id="mdp" class="login_input">
-</div>
+<section id="menu">
+
+    <div class="modal-box_menu">  
+        <div class="modal-body_menu">
+            <ul>
+                <li><a class="nav_horizontal_a" href="index.php">Catalogue</a></li>
+                <li><a class="nav_horizontal_a" href="panier.php">Panier</a></li>
+                <li><a class="nav_horizontal_a" href="ou-acheter.php">Où acheter</a></li>
+            </ul>
+        </div>
+        <div class="modal-footer_menu">
+            <a href="javascript:void(0);" data-no-instant class="js-modal-close_menu" id="close_menu"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+
+</section>
+    
+<section id="login">
+
+    <div class="modal-box_login">  
+        <div class="modal-body_login">
+            <input type="text" name="id" id="id" class="login_input" placeholder="ID">
+            <input type="password" name="mdp" id="mdp" class="login_input" placeholder="MDP">
+            <input type="submit" name="submit" id="sumbit" class="login_submit">
+        </div>
+        <div class="modal-footer_login">
+            <a href="javascript:void(0);" data-no-instant class="js-modal-close_login" id="close_login"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+
+</section>
     
 </header>
