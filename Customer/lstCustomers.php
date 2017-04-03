@@ -4,21 +4,22 @@
     $content = "";
 
 
-  $content .= "<br><h3>List of customers</h3>";
+  $content .= "<br><h3>Liste des clients</h3>";
   $content .=  "<table>";
 
   $content .=  "<tr>";
-    $content .=  "<th>Customers name</td>";
     $content .=  "<th></th>";
+    $content .=  "<th>Nom client</th>";
   $content .=  "</tr>";
 
   $lstFunctions = new Functions();
 
   foreach ($lstFunctions->getCustomers() as $customer) {
     $content .= "<tr>";
-      //$content .= "<td><a href=../Article/deleteProduct.php?product=".$product['id_article'].">-</a></td>";
+      $content .= "<td><a href=deleteCustomer.php?customer=".$customer['id_customer'].">-</a></td>";
       $content .= "<td>". $customer['customer_name']."</td>";
-      //$content .= "<td><a href=../Article/updateProduct.php?product=".$product['id_article'].">Modifier</a></td>";
+      $content .= "<td><a href=updateCustomer.php?customer=".$customer['id_customer'].">Modifier utilisateur</a></td>";
+      $content .= "<td><a href=customerReductions.php?customer=".$customer['id_customer'].">Réductions</a></td>";
     $content .= "</tr>";
   }
 

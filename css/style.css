@@ -21,3 +21,7 @@ ul li a {
  /*pour avoir un effet "outset" avec IE :*/
  border-color:#DCDCDC #696969 #696969 #DCDCDC;
  }
+
+ h1, h2, h3 {
+   text-align: center;
+ }

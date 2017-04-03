@@ -1,9 +1,9 @@
 <?php
 
 class DbConnection {
-    private $dsn = 'mysql:dbname=pepsi2;host=127.0.0.1';
-    private  $user = 'admin';
-    private  $password = '1234';
+    private $dsn = 'mysql:dbname=pepsi2;host=localhost';
+    private  $user = 'root';
+    private  $password = '0000';
     private $dbh = false;
 
     function __construct() {

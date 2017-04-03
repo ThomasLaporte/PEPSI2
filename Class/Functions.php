@@ -179,4 +179,24 @@ Class Functions{
     return $this->customers->getCustomerById($id);
   }
 
+  function updateCustomer($idCustomer)
+  {
+    return $this->customers->updateCustomer($idCustomer);
+  }
+
+  function getPricesByCustomerId($id)
+  {
+    return $this->customers->getPricesByCustomerId($id);
+  }
+
+  function addPriceCustomer($articleId, $customerId, $fixe, $pourcent)
+  {
+    return $this->customers->addPriceCustomer($articleId, $customerId, $fixe, $pourcent);
+  }
+
+  function getAdressesCustomer($customerId)
+  {
+    return $this->customers->getAdressesCustomer($customerId);
+  }
+
 }
