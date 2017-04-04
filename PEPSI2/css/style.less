@@ -7,7 +7,7 @@
 //                3.2 - HEADER
 //                  3.2.1 - NAV
 //                3.3 - CONTENT
-//                3.4 - SIDEBAR
+//                3.4 - BACK OFFICE
 //                3.5 - FOOTER
 //                3.6 - EXCEPTIONS
 //                3.7 - RESPONSIVE
@@ -287,8 +287,6 @@ nav {
     }
 }
 
-//
-
 .menu_in {
     right: 0!important;
     transition: @bezier!important;
@@ -543,7 +541,71 @@ h1 {
     }
 }
 
-/*3.4 - SIDEBAR*/
+/*3.4 - BACK OFFICE*/
+
+.back {
+    //
+    
+    .a_add {
+        color: @w;
+        margin-right: 10px;
+        position: relative;
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &:after {
+            content: "AJOUTER";
+            margin-left: 10px;
+            font-family: @roboto;
+            font-size: 1.5rem;
+            position: absolute;
+            top: 11px;
+            left: 32px;
+        }
+    }
+    .a_delete {
+        color: @w;
+        margin-right: 10px;
+        position: relative;
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &:after {
+            content: "SUPPRIMER";
+            margin-left: 10px;
+            font-family: @roboto;
+            font-size: 1.5rem;
+            position: absolute;
+            top: 11px;
+            left: 32px;
+        }
+    }
+    label {
+        color: @w;
+    }
+    textarea {
+        box-sizing: border-box;
+        resize: none;
+        width: 100%;
+        height: 350px
+    }
+    .back_input_name {
+        width: 100%;
+    }
+}
+
+.a_add_active {
+    border-radius: 50%;
+    border: solid 1px !important;
+}
 
 /*3.5 - FOOTER*/
 

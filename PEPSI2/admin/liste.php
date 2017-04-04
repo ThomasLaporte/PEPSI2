@@ -10,9 +10,10 @@ include 'header.php';
 <h1 class="wow fadeIn">XXX</h1>
     
 <section class="catalogue_products wow fadeInUp">
-    <article class="catalogue_products_title">
+    <article class="catalogue_products_title back">
         <h2 id="cables">XXX</h2>
         <p>Consultez et modifiez la liste de XXX</p>
+        <a href="ajout.php"><i class="fa fa-plus fa-2x a_add" aria-hidden="true"></i></a>
     </article>
     <div class="catalogue_products_wrap">
     <article class="catalogue_products_display">
