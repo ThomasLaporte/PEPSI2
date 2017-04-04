@@ -1,26 +1,30 @@
-<?php include "../Class/Functions.php";
+<?php
+    include "../Class/Functions.php";
     require_once "../header.html";
 
     $lstFunctions = new Functions();
     if(isset($_GET['customer']))
     {
       if(isset($_POST['buttonClic'])){
-        // Update du customer
-        if($lstFunctions->updateCustomer($_GET['customer'], $_POST['customerCompanyName'], $_POST['customerName'], $_POST['customerEmail'], $_POST['customerPhone'], $_POST['customerMobile'], $_POST['customerFax'], $_POST['customerAdmin']) > 0)
+        $updateDown = 0;
+
+        // On fait un test pour savoir si l'utilisateur a check la case administrateur
+        $isAdmin = 0;
+        if(isset($_POST['customerAdmin'])){$isAdmin = 1;}
+
+        $updateDown += $lstFunctions->updateCustomer($_GET['customer'], $_POST['customerCompanyName'], $_POST['customerName'], $_POST['customerEmail'], $_POST['customerPhone'], $_POST['customerMobile'], $_POST['customerFax'],$_POST['customerFunction'], $isAdmin);
+
+        // Update de ses adresses (facturation/livraison)
+        foreach ($lstFunctions->getAdressesCustomer($_GET['customer']) as $adress)
         {
-          // Update de ses adresses (facturation/livraison)
-          foreach ($lstFunctions->getAdressesCustomer($_GET['customer']) as $adress)
-          {
-            $lstFunctions->updateAdressCustomer($adress['id_adress'], $_POST['customerAdr_Adress'.$adress['id_adress']], $_POST['customerAdr_Postal'.$adress['id_adress']], $_POST['customerAdr_City'.$adress['id_adress']], 'customerAdr_Country'.$adress['id_adress']);
-          }
-
-
+          $updateDown += $lstFunctions->updateAdressCustomer($adress['id_adress'], $_POST['customerAdr_Adress'.$adress['id_adress']], $_POST['customerAdr_Postal'.$adress['id_adress']], $_POST['customerAdr_City'.$adress['id_adress']], 'customerAdr_Country'.$adress['id_adress']);
         }
 
-
-
-
-
+        // Si au moins une msie à jour a été effectuée, on retourne à la liste des clients
+        if($updateDown > 0)
+        {
+          header("Location: lstCustomers.php");
+        }
       }
 
 
@@ -35,14 +39,13 @@
       $content .= "Portable: <input type=\"text\" required name=\"customerMobile\" value=\"".str_pad($currentCustomer['mobile'],10,"0",STR_PAD_LEFT)."\"><br>";
       $content .= "Fax:<input type=\"text\" name=\"customerFax\" value=\"".str_pad($currentCustomer['fax'],10,"0",STR_PAD_LEFT)."\"><br>";
       $content .= "Fonction:<input type=\"text\" name=\"customerFunction\" value=\"".$currentCustomer['function']."\"><br>";
-      $content .= "Adminitrateur:<input type=\"checkbox\" name=\"customerAdmin\" value=\"".$currentCustomer['function']."\"><br>";
 
+      $isAdmin = "";
+      if($currentCustomer['admin'] == 1){$isAdmin = "checked";}
+      $content .= "Adminitrateur:<input type=\"checkbox\" name=\"customerAdmin\"". $isAdmin."><br>";
+
+      // Zone des adresses du customer
       $content .=  "<table>";
-      // $content .=  "<tr>";
-      //   $content .=  "<th></th>";
-      //   $content .=  "<th></th>";
-      // $content .=  "</tr>";
-
       $content .= "</br>";
       foreach ($lstFunctions->getAdressesCustomer($_GET['customer']) as $adress) {
         $content .= "<hr>";

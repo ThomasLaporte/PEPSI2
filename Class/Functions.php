@@ -41,6 +41,9 @@ Class Functions{
 
   function deleteProduct($id)
   {
+    // Suppression du detail des achats lors de la suppression d'un article
+    // $this->products->deletePrice($id);
+    // $this->products->deleteOrderDetail($id);
     return $this->products->deleteProduct($id);
   }
 
@@ -179,9 +182,9 @@ Class Functions{
     return $this->customers->getCustomerById($id);
   }
 
-  function updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin)
+  function updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $function, $admin)
   {
-    return $this->customers->updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin);
+    return $this->customers->updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $function, $admin);
   }
 
   function getPricesByCustomerId($id)
@@ -202,6 +205,16 @@ Class Functions{
   function updateAdressCustomer($idAdress, $adress, $postal, $city, $country)
   {
     return $this->customers->updateAdressCustomer($idAdress, $adress, $postal, $city, $country);
+  }
+
+  function getOrdersCustomer($customerId)
+  {
+    return $this->customers->getOrdersCustomer($customerId);
+  }
+
+  function deleteCustomer($customerId)
+  {
+     return $this->customers->deleteCustomer($customerId);
   }
 
 }

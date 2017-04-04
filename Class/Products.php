@@ -77,6 +77,28 @@ class Products {
       return $this->DB->query($sql, $array);
      }
 
+    //  public function deleteOrderDetail($id)
+    //  {
+    //    $sql = "DELETE FROM order_detail WHERE article_id_article = :id LIMIT 1";
+     //
+    //    $array = array(
+    //      ':id' => $id);
+     //
+    //   return $this->DB->query($sql, $array);
+    //  }
+
+    //  public function deletePrice($id)
+    //  {
+    //    $sql = "DELETE FROM price WHERE article_id_article = :id LIMIT 1";
+     //
+    //    $array = array(
+    //      ':id' => $id);
+     //
+    //   return $this->DB->query($sql, $array);
+     //
+    //  }
+
+
      public function addCharacteristic($articleId, $desc, $spec, $idLanguage)
      {
        $sql = "INSERT INTO characteristics (article_id_article, description, specification, language_idlanguage) VALUES (:idArticle, :desc, :spec, :idLanguage)";

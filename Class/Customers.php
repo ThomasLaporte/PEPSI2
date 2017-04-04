@@ -12,30 +12,32 @@ class Customers {
    {
      $sql = "SELECT * FROM customer";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return  $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function getCustomerById($id)
    {
      $sql = "SELECT * FROM customer WHERE id_customer = '". $id ."'";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return  $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
-   public function updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin)
+   public function updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $function, $admin)
    {
-     $sql = "UPDATE custumer SET name = :name, adress = :adress, postal_code = :postal, city = :city, country = :country ".
-            "WHERE id_manufacturer = :id LIMIT 1";
+     $sql = "UPDATE customer SET customer_name = :companyName, name = :name, email = :email, phone = :phone, mobile = :mobile, fax = :fax, function = :function, admin = :admin ".
+            "WHERE id_customer = :idCustomer LIMIT 1";
 
     $array = array(
-      ':id' => $id,
+      ':idCustomer' => $idCustomer,
+      ':companyName' => $companyName,
       ':name' => $name,
-      ':adress' => $adress,
-      ':postal' => $postalCode,
-      ':city' => $city,
-      ':country' => $country);
+      ':email' => $email,
+      ':phone' => $phone,
+      ':mobile' => $mobile,
+      ':fax' => $fax,
+      ':function' => $function,
+      ':admin' => $admin);
+
 
     return $this->DB->query($sql, $array);
    }
@@ -45,8 +47,7 @@ class Customers {
    {
      $sql = "SELECT * FROM Price WHERE customer_id_customer = '". $id ."'";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function addPriceCustomer($articleId, $customerId, $fixe, $pourcent)
@@ -70,13 +71,12 @@ class Customers {
      "AND a.customer_id_customer = '". $customerId ."'";
     //  $sql = "SELECT * FROM customer_adress WHERE customer_id_customer = '". $customerId ."'";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function updateAdressCustomer($idAdress, $adress, $postal, $city, $country)
    {
-     $sql = "UPDATE custumer_adress SET adress = :adress, postal_code = :postal, city = :city, country = :country ".
+     $sql = "UPDATE customer_adress SET adress = :adress, postal_code = :postal, city = :city, country = :country ".
             "WHERE id_adress = :id LIMIT 1";
 
     $array = array(
@@ -89,4 +89,60 @@ class Customers {
     return $this->DB->query($sql, $array);
    }
 
+  //  public function getOrdersCustomer($id)
+  //  {
+  //    $sql = "SELECT * FROM pepsi2.order WHERE customer_id_customer = '". $id ."'";
+  //    $sth = $this->DB->query($sql);
+  //    return $sth->fetchAll(PDO::FETCH_ASSOC);
+  //  }
+   //
+  //  public function deleteOrderDetails($id)
+  //  {
+  //    $sql = "DELETE FROM order_detail WHERE order_id_order= :id LIMIT 1";
+   //
+  //    $array = array(
+  //      ':id' => $id);
+   //
+  //   return $this->DB->query($sql, $array);
+  //  }
+   //
+  //  public function deleteOrder($idCustomer)
+  //  {
+  //    $sql = "DELETE FROM pepsi2.order WHERE customer_id_customer= :id";
+   //
+  //    $array = array(
+  //      ':id' => $idCustomer);
+   //
+  //     return $this->DB->query($sql, $array);
+  //  }
+   //
+  //  public function deleteCustomerAdresses($idCustomer)
+  //  {
+  //    $sql = "DELETE FROM customer_adress WHERE customer_id_customer= :id";
+   //
+  //    $array = array(
+  //      ':id' => $idCustomer);
+   //
+  //     return $this->DB->query($sql, $array);
+  //  }
+   //
+  //  public function deleteCustomerPrices($idCustomer)
+  //  {
+  //    $sql = "DELETE FROM price WHERE customer_id_customer= :id";
+   //
+  //    $array = array(
+  //      ':id' => $idCustomer);
+   //
+  //     return $this->DB->query($sql, $array);
+  //  }
+
+   public function deleteCustomer($idCustomer)
+   {
+     $sql = "DELETE FROM customer WHERE id_customer= :id LIMIT 1";
+
+     $array = array(
+       ':id' => $idCustomer);
+
+      return $this->DB->query($sql, $array);
+   }
  }

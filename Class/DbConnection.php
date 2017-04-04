@@ -34,7 +34,6 @@ class DbConnection {
             $req = $this->dbh->prepare($stat);
             $req->execute($arg);
 
-
         } else {
             $req = $this->dbh->query($stat);
         }

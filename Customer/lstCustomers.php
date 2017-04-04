@@ -1,10 +1,8 @@
-<?php include "../Class/Functions.php";
+<?php
+  include "../Class/Functions.php";
+  require_once "../header.html";
 
-    require_once "../header.html";
-    $content = "";
-
-
-  $content .= "<br><h3>Liste des clients</h3>";
+  $content = "<br><h3>Liste des clients</h3>";
   $content .=  "<table>";
 
   $content .=  "<tr>";
@@ -24,12 +22,10 @@
   }
 
   $content .=  "</table>";
-$content .= "<a href=../Article/addProduct.php>Ajouter produit</a>";
+  $content .= "<a href=../Article/addProduct.php>Ajouter produit</a>";
 
-
-
-echo $content;
-  ?>
+  echo $content;
+?>
 
 
   </body>
