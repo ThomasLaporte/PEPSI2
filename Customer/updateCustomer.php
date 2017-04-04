@@ -6,7 +6,7 @@
     {
       if(isset($_POST['buttonClic'])){
         // Update du customer
-        if($lstFunctions->updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin) > 0)
+        if($lstFunctions->updateCustomer($_GET['customer'], $_POST['customerCompanyName'], $_POST['customerName'], $_POST['customerEmail'], $_POST['customerPhone'], $_POST['customerMobile'], $_POST['customerFax'], $_POST['customerAdmin']) > 0)
         {
           // Update de ses adresses (facturation/livraison)
           foreach ($lstFunctions->getAdressesCustomer($_GET['customer']) as $adress)
@@ -35,7 +35,7 @@
       $content .= "Portable: <input type=\"text\" required name=\"customerMobile\" value=\"".str_pad($currentCustomer['mobile'],10,"0",STR_PAD_LEFT)."\"><br>";
       $content .= "Fax:<input type=\"text\" name=\"customerFax\" value=\"".str_pad($currentCustomer['fax'],10,"0",STR_PAD_LEFT)."\"><br>";
       $content .= "Fonction:<input type=\"text\" name=\"customerFunction\" value=\"".$currentCustomer['function']."\"><br>";
-      $content .= "Adminitrateur:<input type=\"checkbox\" name=\"customerFunction\" value=\"".$currentCustomer['function']."\"><br>";
+      $content .= "Adminitrateur:<input type=\"checkbox\" name=\"customerAdmin\" value=\"".$currentCustomer['function']."\"><br>";
 
       $content .=  "<table>";
       // $content .=  "<tr>";
