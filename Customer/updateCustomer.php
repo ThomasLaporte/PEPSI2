@@ -6,12 +6,21 @@
     {
       if(isset($_POST['buttonClic'])){
         // Update du customer
+        if($lstFunctions->updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin) > 0)
+        {
+          // Update de ses adresses (facturation/livraison)
+          foreach ($lstFunctions->getAdressesCustomer($_GET['customer']) as $adress)
+          {
+            $lstFunctions->updateAdressCustomer($adress['id_adress'], $_POST['customerAdr_Adress'.$adress['id_adress']], $_POST['customerAdr_Postal'.$adress['id_adress']], $_POST['customerAdr_City'.$adress['id_adress']], 'customerAdr_Country'.$adress['id_adress']);
+          }
+
+
+        }
 
 
 
 
 
-        // Update de ses adresses (facturation/livraison)
       }
 
 
@@ -41,7 +50,7 @@
         $content .= "Adresse: <input type=\"text\" required name=\"customerAdr_Adress".$adress['id_adress']."\" value=\"".$adress['adress']."\"><br>";
         $content .= "Code postal: <input type=\"number\" required name=\"customerAdr_Postal".$adress['id_adress']."\" value=\"".str_pad($adress['postal_code'],5,"0",STR_PAD_LEFT)."\"><br>";
         $content .= "Ville: <input type=\"text\" required name=\"customerAdr_City".$adress['id_adress']."\" value=\"".$adress['city']."\"><br>";
-        $content .= "Pays: <select name=\"customerAdr_Country\">";
+        $content .= "Pays: <select name=\"customerAdr_Country".$adress['id_adress']."\">";
         foreach ($lstFunctions->getCountries() as $country) {
           $isSelected = "";
           if($country['id'] == $adress['country']){$isSelected = "Selected";}

@@ -179,9 +179,9 @@ Class Functions{
     return $this->customers->getCustomerById($id);
   }
 
-  function updateCustomer($idCustomer)
+  function updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin)
   {
-    return $this->customers->updateCustomer($idCustomer);
+    return $this->customers->updateCustomer($idCustomer, $companyName, $name, $email, $phone, $mobile, $fax, $admin);
   }
 
   function getPricesByCustomerId($id)
@@ -197,6 +197,11 @@ Class Functions{
   function getAdressesCustomer($customerId)
   {
     return $this->customers->getAdressesCustomer($customerId);
+  }
+
+  function updateAdressCustomer($idAdress, $adress, $postal, $city, $country)
+  {
+    return $this->customers->updateAdressCustomer($idAdress, $adress, $postal, $city, $country);
   }
 
 }

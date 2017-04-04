@@ -74,5 +74,19 @@ class Customers {
      return $rowset;
    }
 
+   public function updateAdressCustomer($idAdress, $adress, $postal, $city, $country)
+   {
+     $sql = "UPDATE custumer_adress SET adress = :adress, postal_code = :postal, city = :city, country = :country ".
+            "WHERE id_adress = :id LIMIT 1";
+
+    $array = array(
+      ':id' => $idAdress,
+      ':adress' => $adress,
+      ':postal' => $postal,
+      ':city' => $city,
+      ':country' => $country);
+
+    return $this->DB->query($sql, $array);
+   }
 
  }
