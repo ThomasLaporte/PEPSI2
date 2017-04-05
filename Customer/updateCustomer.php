@@ -17,14 +17,14 @@
         // Update de ses adresses (facturation/livraison)
         foreach ($lstFunctions->getAdressesCustomer($_GET['customer']) as $adress)
         {
-          $updateDown += $lstFunctions->updateAdressCustomer($adress['id_adress'], $_POST['customerAdr_Adress'.$adress['id_adress']], $_POST['customerAdr_Postal'.$adress['id_adress']], $_POST['customerAdr_City'.$adress['id_adress']], 'customerAdr_Country'.$adress['id_adress']);
+          $updateDown += $lstFunctions->updateAdressCustomer($adress['id_adress'], $_POST['customerAdr_Adress'.$adress['id_adress']], $_POST['customerAdr_Postal'.$adress['id_adress']], $_POST['customerAdr_City'.$adress['id_adress']], $_POST['customerAdr_Country'.$adress['id_adress']]);
         }
 
         // Si au moins une msie à jour a été effectuée, on retourne à la liste des clients
-        if($updateDown > 0)
-        {
-          header("Location: lstCustomers.php");
-        }
+        // if($updateDown > 0)
+        // {
+        //   header("Location: lstCustomers.php");
+        // }
       }
 
 
