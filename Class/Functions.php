@@ -207,14 +207,19 @@ Class Functions{
     return $this->customers->updateAdressCustomer($idAdress, $adress, $postal, $city, $country);
   }
 
-  function getOrdersCustomer($customerId)
-  {
-    return $this->customers->getOrdersCustomer($customerId);
-  }
+  // function getOrdersCustomer($customerId)
+  // {
+  //   return $this->customers->getOrdersCustomer($customerId);
+  // }
 
   function deleteCustomer($customerId)
   {
      return $this->customers->deleteCustomer($customerId);
+  }
+
+  function getAdressTypes()
+  {
+    return $this->customers->getAdressTypes();
   }
 
 }

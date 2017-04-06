@@ -86,6 +86,7 @@ class Customers {
       ':city' => $city,
       ':country' => $country);
 
+      var_dump($array);
     return $this->DB->query($sql, $array);
    }
 
@@ -144,5 +145,12 @@ class Customers {
        ':id' => $idCustomer);
 
       return $this->DB->query($sql, $array);
+   }
+
+   public function getAdressTypes()
+   {
+     $sql = "SELECT * FROM type_adress";
+        $sth = $this->DB->query($sql);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
  }

@@ -8,6 +8,7 @@ li {
  margin-left:2px;
  float:left; /*pour IE*/
  }
+
 ul li a {
  display:block;
  float:left;

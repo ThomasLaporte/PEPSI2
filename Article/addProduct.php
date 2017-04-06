@@ -1,7 +1,6 @@
 <?php   include '../Class/Functions.php';
-        require_once '../header.html';?>
-
-    <?php
+        require_once '../header.html';
+        
     $lstFunctions = new Functions();
     $languages = $lstFunctions->getLanguages();
     // Si l'utilisateur clic sur le bouton valider apres aviur fait ses modifications
