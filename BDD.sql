@@ -1200,3 +1200,7 @@ INSERT INTO `customer_adress` (`id_adress`,`adress`,`postal_code`,`city`,`longit
 INSERT INTO `customer_adress` (`id_adress`,`adress`,`postal_code`,`city`,`longitude`,`latitude`,`country`,`type_adress_id_type_address`,`customer_id_customer`) VALUES (302,'3  avenue du pays d\'Auge',84275,'VEDENE ',NULL,NULL,75,1,302);
 INSERT INTO `customer_adress` (`id_adress`,`adress`,`postal_code`,`city`,`longitude`,`latitude`,`country`,`type_adress_id_type_address`,`customer_id_customer`) VALUES (303,'267  BD PINEL',69200,'VENISSIEUX',NULL,NULL,75,1,303);
 INSERT INTO `customer_adress` (`id_adress`,`adress`,`postal_code`,`city`,`longitude`,`latitude`,`country`,`type_adress_id_type_address`,`customer_id_customer`) VALUES (304,'14  rue du Bois de la Champelle',69400,'VILLEFRANCHE S/SAÔNE',NULL,NULL,75,1,304);
+
+UPDATE `pepsi2`.`customer_adress` SET `longitude`='-0.9103112', `latitude`='46.1011558' WHERE `id_adress`='2';
+UPDATE `pepsi2`.`customer_adress` SET `longitude`='4.0877144', `latitude`='44.1264799' WHERE `id_adress`='9';
+UPDATE `pepsi2`.`customer_adress` SET `longitude`='5.96251170', `latitude`='47.21471649' WHERE `id_adress`='43';
