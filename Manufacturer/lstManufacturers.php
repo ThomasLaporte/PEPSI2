@@ -1,5 +1,5 @@
 <?php include "../Class/Functions.php";
-    require_once "../header.html";
+     include '../header.php';
 
   $content = "<br><h3>List of manufacturer</h3>";
   $content .=  "<table>";

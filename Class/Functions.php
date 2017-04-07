@@ -209,7 +209,7 @@ Class Functions{
 
   function addCustomer($login, $password, $companyName, $name, $email, $phone, $mobile, $fax, $function, $admin)
   {
-    return $this->customers->addCustomer($companyName, $name, $email, $phone, $mobile, $fax, $function, $admin);
+    return $this->customers->addCustomer($login, $password, $companyName, $name, $email, $phone, $mobile, $fax, $function, $admin);
   }
 
   function addCustomerAdress($idCustomer, $adress, $postal, $city, $country, $adressType)

@@ -1,38 +1,39 @@
 <?php
-require_once "../header.html";
+
+$title_page = 'Spectasonic - Back office';
+include '../header.php';
 include "../Class/Functions.php";
+$lstFunctions = new Functions();
+?>
+
+<div class="wrap">
+
+<h1 class="wow fadeIn">Back office</h1>
+<?php foreach ($lstFunctions->getProductsCategsByLang('1') as $categ) { ?>
+
+  <section class="catalogue_products wow fadeInUp">
+      <article class="catalogue_products_title">
+          <h2><?php echo $categ['name']; ?></h2>
+          <!-- <p>Consultez et modifiez la liste des produits</p> -->
+      </article>
+      <div class="catalogue_products_wrap">
+      <article class="article_products_display">
+          <a href="#" class="article_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
+          <div class="article_products_display_details">
+              <p class="article_products_display_details_title"><?php echo $categ['name']; ?></p>
+              <p><?php echo $categ['description']; ?></p>
+              <a href="liste.php"><button>Voir</button></a>
+          </div>
+      </article>
+      </div>
+  </section>
+<?php } ?>
 
 
+</div>
 
-  $content = "";
-  $lstFunctions = new Functions();
+<?php
 
-  $content .= "<br><h3>List of article categories</h3>";
-  $content .=  "<table>";
+include '../footer.php';
 
-  $content .=  "<tr>";
-    $content .=  "<th>Category name</th>";
-    $content .=  "<th></th>";
-  $content .=  "</tr>";
-
-
-  // Le parametre correspond a la langue : par defaut Francais (id 1)
-  foreach ($lstFunctions->getProductsCategsByLang('1') as $categ) {
-    $content .= "<tr>";
-      $content .= "<td><a href=\"deleteCategArticle.php?categ=".$categ['code']."\">-</a></td>";
-      $content .= "<td>". $categ['name']."</td>";
-      $content .= "<td><a href=updateProductCateg.php?categ=".$categ['code'].">Modifier</a></td>";
-    $content .= "</tr>";
-  }
-
-  $content .=  "</table>";
-  $content .= "<a href=addCategArticle.php>Ajouter produit</a>";
-
-
-
-  echo $content;
-  ?>
-
-
-</body>
-</html>
+?>

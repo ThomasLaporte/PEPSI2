@@ -27,11 +27,11 @@ $title_page = 'Spectasonic - Catalogue';
     <div class="catalogue_products_wrap">
         <?php foreach ($lstFunctions->getProductByCateg($categ['code']) as $article) {?>
           <article class="catalogue_products_display">
-              <a href="article.php" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
+              <a href="showArticle.php?product=<?php echo $article['id_article']; ?>" class="catalogue_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
               <div class="catalogue_products_display_details">
                   <p class="catalogue_products_display_details_title"> <?php echo $article['name']; ?> </p>
                   <?php $articleDescription = $lstFunctions->getCharacteristicsByIdArticle($article['id_article'])[0]['description']; ?>
-                  <p> <?php echo substr($articleDescription, 0, 121); ?> <a href="#">Lire la suite</a></p>
+                  <p> <?php echo substr($articleDescription, 0, 121); ?> <a href="showArticle.php?product=<?php echo $article['id_article']; ?>">Lire la suite</a></p>
               </div>
           </article>
           <?php

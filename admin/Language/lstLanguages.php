@@ -20,7 +20,7 @@
   // Le parametre correspond a la langue : par defaut Francais (id 1)
   foreach ($lstFunctions->getLanguages() as $language) {
     $content .= "<tr>";
-      $content .= "<td><a href=\"deleteLanguage.php?lang=".$language['idlanguage']."\">-</a></td>";
+      $content .= "<td><a href=\"deleteLanguage.php?lang=".$language['id_language']."\">-</a></td>";
       $content .= "<td>". $language['name']."</td>";
     $content .= "</tr>";
   }
