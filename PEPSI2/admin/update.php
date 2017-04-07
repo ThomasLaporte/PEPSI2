@@ -24,13 +24,21 @@ include 'header.php';
             <label>En stock :</label>
             <input type="text" value="XXX">
             <label>Fabriquant :</label>
-            <input type="text" value="XXX">
+            <select>
+                <option>AAA</option>
+                <option>AAA</option>
+            </select>
             <label>Dimensions :</label>
             <input type="text" value="XXX">
             <label>Poids :</label>
             <input type="text" value="XXX">
             <label>Catégorie :</label>
-            <input type="text" value="XXX">
+            <select>
+                <option>AAA</option>
+                <option>AAA</option>
+            </select>
+            <label for="file" class="label-file">Choisir une image</label>
+            <input id="file" class="input-file" type="file">
         </form>
     </article>
     <div class="catalogue_products_wrap back">
