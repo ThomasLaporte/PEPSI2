@@ -1,21 +1,81 @@
-create database pepsi2 DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_unicode_ci ;
-use pepsi2;
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Table `parameters`
+-- Table `language`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `parameters` (
-  `id_parameters` INT NOT NULL,
-  `name` VARCHAR(45) NULL,
-  `value` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_parameters`))
+CREATE TABLE IF NOT EXISTS `language` (
+  `idlanguage` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
+  PRIMARY KEY (`idlanguage`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `article_category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `article_category` (
+  `code` INT(11) NOT NULL,
+  `language_idlanguage` INT(11) NOT NULL,
+  `name` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
+  `description` LONGTEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  INDEX `fk_article_category_language1_idx` (`language_idlanguage` ASC),
+  PRIMARY KEY (`code`, `language_idlanguage`),
+  CONSTRAINT `fk_article_category_language1`
+    FOREIGN KEY (`language_idlanguage`)
+    REFERENCES `language` (`idlanguage`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `manufacturer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `manufacturer` (
+  `id_manufacturer` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
+  `adress` VARCHAR(50) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `postal_code` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `city` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `country` INT(5) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_manufacturer`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `article`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `article` (
+  `id_article` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
+  `reference` VARCHAR(20) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `quantity` INT(3) NOT NULL,
+  `public_price` INT(6) NOT NULL,
+  `weight` FLOAT NULL DEFAULT NULL,
+  `dimension` VARCHAR(50) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `picture` VARCHAR(50) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `manufacturer_id_manufacturer` INT(11) NOT NULL,
+  `article_category_code` INT(11) NOT NULL,
+  `article_category_language_idlanguage` INT(11) NOT NULL,
+  PRIMARY KEY (`id_article`),
+  INDEX `fk_article_article_category1_idx` (`article_category_code` ASC, `article_category_language_idlanguage` ASC),
+  CONSTRAINT `fk_article_article_category1`
+    FOREIGN KEY (`article_category_code` , `article_category_language_idlanguage`)
+    REFERENCES `article_category` (`code` , `language_idlanguage`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
 
 -- -----------------------------------------------------
 -- Table `customer`
@@ -39,106 +99,25 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `manufacturer`
+-- Table `Price`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `manufacturer` (
-  `id_manufacturer` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
-  `adress` VARCHAR(50) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `postal_code` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `city` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `country` INT(5) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_manufacturer`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `language`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `language` (
-  `id_language` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
-  PRIMARY KEY (`id_language`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `article_category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `article_category` (
-  `code` INT(11) NOT NULL,
-  `name` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
-  `description` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `language_id_language` INT(11) NOT NULL,
-  PRIMARY KEY (`code`, `language_id_language`),
-  INDEX `fk_article_category_language1_idx` (`language_id_language` ASC),
-  CONSTRAINT `fk_article_category_language1`
-    FOREIGN KEY (`language_id_language`)
-    REFERENCES `language` (`id_language`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `article`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `article` (
-  `id_article` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
-  `reference` VARCHAR(20) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `quantity` INT(3) NOT NULL,
-  `public_price` INT(6) NOT NULL,
-  `weight` FLOAT NULL DEFAULT NULL,
-  `dimension` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `picture` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `manufacturer_id_manufacturer` INT(11) NOT NULL,
-  `article_category_code` INT(11) NOT NULL,
-  `article_category_language_id_language` INT(11) NOT NULL,
-  PRIMARY KEY (`id_article`),
-  INDEX `fk_article_manufacturer1_idx` (`manufacturer_id_manufacturer` ASC),
-  INDEX `fk_article_article_category1_idx` (`article_category_code` ASC, `article_category_language_id_language` ASC),
-  CONSTRAINT `fk_article_manufacturer1`
-    FOREIGN KEY (`manufacturer_id_manufacturer`)
-    REFERENCES `manufacturer` (`id_manufacturer`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_article_article_category1`
-    FOREIGN KEY (`article_category_code` , `article_category_language_id_language`)
-    REFERENCES `article_category` (`code` , `language_id_language`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `price`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `price` (
+CREATE TABLE IF NOT EXISTS `Price` (
   `fixe` FLOAT NOT NULL,
   `pourcentage` FLOAT NOT NULL,
-  `customer_id_customer` INT(11) NOT NULL,
   `article_id_article` INT(11) NOT NULL,
-  PRIMARY KEY (`customer_id_customer`, `article_id_article`),
-  INDEX `fk_price_article1_idx` (`article_id_article` ASC),
-  CONSTRAINT `fk_price_customer1`
-    FOREIGN KEY (`customer_id_customer`)
-    REFERENCES `customer` (`id_customer`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_price_article1`
+  `customer_id_customer` INT(11) NOT NULL,
+  PRIMARY KEY (`article_id_article`, `customer_id_customer`),
+  INDEX `fk_Price_customer1_idx` (`customer_id_customer` ASC),
+  CONSTRAINT `fk_Price_article1`
     FOREIGN KEY (`article_id_article`)
     REFERENCES `article` (`id_article`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Price_customer1`
+    FOREIGN KEY (`customer_id_customer`)
+    REFERENCES `customer` (`id_customer`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
@@ -152,21 +131,22 @@ CREATE TABLE IF NOT EXISTS `characteristics` (
   `article_id_article` INT(11) NOT NULL,
   `description` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
   `specification` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `language_id_language` INT(11) NOT NULL,
+  `language_idlanguage` INT(11) NOT NULL,
   PRIMARY KEY (`id_characteristics`, `article_id_article`),
+  INDEX `fk_characteristics_language1_idx` (`language_idlanguage` ASC),
   INDEX `fk_characteristics_article1_idx` (`article_id_article` ASC),
-  INDEX `fk_characteristics_language1_idx` (`language_id_language` ASC),
   CONSTRAINT `fk_characteristics_article1`
     FOREIGN KEY (`article_id_article`)
     REFERENCES `article` (`id_article`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_characteristics_language1`
-    FOREIGN KEY (`language_id_language`)
-    REFERENCES `language` (`id_language`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    FOREIGN KEY (`language_idlanguage`)
+    REFERENCES `language` (`idlanguage`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
@@ -176,7 +156,7 @@ COLLATE = utf8_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `type_adress` (
   `id_type_address` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(25) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
+  `name` VARCHAR(25) CHARACTER SET 'utf8' NOT NULL,
   PRIMARY KEY (`id_type_address`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -188,11 +168,11 @@ COLLATE = utf8_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `customer_adress` (
   `id_adress` INT(11) NOT NULL AUTO_INCREMENT,
-  `adress` VARCHAR(80) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
+  `adress` VARCHAR(80) CHARACTER SET 'utf8' NOT NULL,
   `postal_code` INT(11) NOT NULL,
-  `city` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
-  `longitude` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `latitude` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
+  `city` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
+  `longitude` VARCHAR(50) NULL DEFAULT NULL,
+  `latitude` VARCHAR(50) NULL DEFAULT NULL,
   `country` INT(5) NOT NULL,
   `type_adress_id_type_address` INT(11) NOT NULL,
   `customer_id_customer` INT(11) NOT NULL,
@@ -202,58 +182,58 @@ CREATE TABLE IF NOT EXISTS `customer_adress` (
   CONSTRAINT `fk_customer_adress_customer1`
     FOREIGN KEY (`customer_id_customer`)
     REFERENCES `customer` (`id_customer`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_customer_adress_type_adress1`
     FOREIGN KEY (`type_adress_id_type_address`)
     REFERENCES `type_adress` (`id_type_address`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `purchase`
+-- Table `order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `purchase` (
-  `id_purchase` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `order` (
+  `id_order` INT(11) NOT NULL AUTO_INCREMENT,
   `date_purchase` DATE NOT NULL,
   `customer_id_customer` INT(11) NOT NULL,
-  PRIMARY KEY (`id_purchase`),
-  INDEX `fk_purchase_customer1_idx` (`customer_id_customer` ASC),
-  CONSTRAINT `fk_purchase_customer1`
+  PRIMARY KEY (`id_order`),
+  INDEX `fk_order_customer1_idx` (`customer_id_customer` ASC),
+  CONSTRAINT `fk_order_customer1`
     FOREIGN KEY (`customer_id_customer`)
     REFERENCES `customer` (`id_customer`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `purchase_detail`
+-- Table `order_detail`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `purchase_detail` (
-  `id_purchase_detail` INT(11) NOT NULL AUTO_INCREMENT,
-  `purchase_id_purchase` INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `order_detail` (
+  `idorder_detail` INT(11) NOT NULL AUTO_INCREMENT,
+  `order_id_order` INT(11) NOT NULL,
   `article_id_article` INT(11) NOT NULL,
   `quantity` INT(11) NOT NULL,
-  PRIMARY KEY (`id_purchase_detail`, `purchase_id_purchase`),
+  PRIMARY KEY (`idorder_detail`, `order_id_order`),
   INDEX `fk_order_detail_article1_idx` (`article_id_article` ASC),
-  INDEX `fk_purchase_detail_purchase1_idx` (`purchase_id_purchase` ASC),
+  INDEX `fk_order_detail_order1_idx` (`order_id_order` ASC),
   CONSTRAINT `fk_order_detail_article1`
     FOREIGN KEY (`article_id_article`)
     REFERENCES `article` (`id_article`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_purchase_detail_purchase1`
-    FOREIGN KEY (`purchase_id_purchase`)
-    REFERENCES `purchase` (`id_purchase`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_detail_order1`
+    FOREIGN KEY (`order_id_order`)
+    REFERENCES `order` (`id_order`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
@@ -280,6 +260,7 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 
 INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) VALUES
@@ -525,66 +506,66 @@ INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) 
 (240, 891, 'CS', 'SCG', 'Serbia and Montenegro', 'Serbie-et-Monténégro'),
 (241, 894, 'ZM', 'ZMB', 'Zambia', 'Zambie');
 
-INSERT INTO `language` (`id_language`, `name`) VALUES ('1', 'Français');
-INSERT INTO `language` (`id_language`, `name`) VALUES ('2', 'English');
+INSERT INTO `language` (`idlanguage`, `name`) VALUES ('1', 'Français');
+INSERT INTO `language` (`idlanguage`, `name`) VALUES ('2', 'English');
 
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Amplificateurs', '1', 'La réputation de notre gamme d\'amplificateurs n\'est plus à démontrer. Elle a marqué le siècle dernier et aborde le nouveau avec optimisme ! Vous êtes un(e) puriste, un(e) passionné(e)? Rejoignez la communauté des passionnés de la HIFI à son plus haut niveau et goûtez à l\'essence même du son le plus parfait.', '1');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Amplifiers', '1', 'The reputation of our range of amplifiers is no longer to be demonstrated. She marked the last century and approaches the new with optimism! You are a purist, an enthusiast? Join the community of HIFI enthusiasts at its highest level and experience the essence of the most perfect sound.', '2');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Enceintes', '2', 'Que ce soit pour de la Haute Fidélité ou dans une configuration Home Cinéma, le choix des enceintes est tout simplement primordial. Sans écarter l\'idée de les associer à d\'autres composants électroniques (en particulier l\'amplificateur), tous les spécialistes sont unanimes : les enceintes ont une durée de vie optimale.', '1');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Speakers', '2', 'Whether for high fidelity or in a home cinema configuration, the choice of speakers is simply paramount. While the idea of combining them with other electronic components (in particular the amplifier), all specialists are unanimous: the speakers have an optimal life span.', '2');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Câbles', '3', 'Les cables Spectasonic, ainsi que ceux fabriqués par nos confrères et disponibles sur notre site, ont été rigoureusement testé par nos techniciens avant leur commercialisation. Ils fournissent la qualité optimale sans nécessairement alourdir votre budget hifi.', '1');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Cables', '3', 'Spectasonic cables, as well as those manufactured by our colleagues and available on our site, have been rigorously tested by our technicians before their commercialization. They provide the optimal quality without necessarily increasing your hifi budget.', '2');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Lampes', '4', 'Les lampes d\'amplificateurs ont une certaine durée de vie. Nous vous proposons de bénéficier d\'une sélection de lampes définie par nos experts en fonction de leur rapport qualité / prix.', '1');
-INSERT INTO `article_category` (`name`, `code`, `description`, `language_id_language`) VALUES ('Lamps', '4', 'Amplifier lamps have a certain lifespan. We offer you a selection of lamps defined by our experts according to their value for money.', '2');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Amplificateurs', '1', 'La réputation de notre gamme d\'amplificateurs n\'est plus à démontrer. Elle a marqué le siècle dernier et aborde le nouveau avec optimisme ! Vous êtes un(e) puriste, un(e) passionné(e)? Rejoignez la communauté des passionnés de la HIFI à son plus haut niveau et goûtez à l\'essence même du son le plus parfait.', '1');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Amplifiers', '1', 'The reputation of our range of amplifiers is no longer to be demonstrated. She marked the last century and approaches the new with optimism! You are a purist, an enthusiast? Join the community of HIFI enthusiasts at its highest level and experience the essence of the most perfect sound.', '2');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Enceintes', '2', 'Que ce soit pour de la Haute Fidélité ou dans une configuration Home Cinéma, le choix des enceintes est tout simplement primordial. Sans écarter l\'idée de les associer à d\'autres composants électroniques (en particulier l\'amplificateur), tous les spécialistes sont unanimes : les enceintes ont une durée de vie optimale.', '1');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Speakers', '2', 'Whether for high fidelity or in a home cinema configuration, the choice of speakers is simply paramount. While the idea of combining them with other electronic components (in particular the amplifier), all specialists are unanimous: the speakers have an optimal life span.', '2');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Câbles', '3', 'Les cables Spectasonic, ainsi que ceux fabriqués par nos confrères et disponibles sur notre site, ont été rigoureusement testé par nos techniciens avant leur commercialisation. Ils fournissent la qualité optimale sans nécessairement alourdir votre budget hifi.', '1');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Cables', '3', 'Spectasonic cables, as well as those manufactured by our colleagues and available on our site, have been rigorously tested by our technicians before their commercialization. They provide the optimal quality without necessarily increasing your hifi budget.', '2');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Lampes', '4', 'Les lampes d\'amplificateurs ont une certaine durée de vie. Nous vous proposons de bénéficier d\'une sélection de lampes définie par nos experts en fonction de leur rapport qualité / prix.', '1');
+INSERT INTO `article_category` (`name`, `code`, `description`, `language_idlanguage`) VALUES ('Lamps', '4', 'Amplifier lamps have a certain lifespan. We offer you a selection of lamps defined by our experts according to their value for money.', '2');
 
 INSERT INTO `manufacturer` (`name`, `adress`, `postal_code`, `city`, `country`) VALUES ('SPECTASONIC', '18 B Rue Gambetta', '59320', 'EMMERIN', '75');
 INSERT INTO `manufacturer` (`name`, `country`) VALUES ('Chord Electronics', '228');
 INSERT INTO `manufacturer` (`name`, `city`, `country`) VALUES ('SOVTEK', 'Saratov', '182');
 INSERT INTO `manufacturer` (`name`, `city`, `country`) VALUES ('NORDOST', 'Holliston', '231');
 
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (1,'SPECTALIZER','SPZ1',10,7657,NULL,'44 x 37 x 10',NULL,1,1,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (2,'SPECTALIZERII','SPZ2',10,10257,NULL,'45 x 39 x 15',NULL,1,1,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (3,'SPECTALIZERIII','SPZ3',10,5880,NULL,'40 x 32 x 12',NULL,1,1,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (4,'ALTABOR','ENC01',10,6242,NULL,' 22 x 99 x 35',NULL,1,2,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (5,'KUB','ENC02',10,3055,NULL,'',NULL,1,2,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (6,'ANTHEM 12','CANT10',10,283,NULL,'2 x 1m',NULL,2,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (7,'ANTHEM 11','CANT11',10,232,NULL,'2 x 1m',NULL,2,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (8,'ANTHEM 10','CANT12',10,241,NULL,'2 x 2m',NULL,2,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (9,'WILDLIGHT','CAB11',10,113,NULL,'2 X 2m',NULL,4,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (10,'CM07','CAB01',10,290,NULL,'2 x 1m',NULL,1,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (11,'CM04','CAB02',10,120,NULL,'2 X 2m',NULL,1,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (12,'SPECTACNX','CAB03',10,280,NULL,'2 x 8m',NULL,1,3,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (13,'SOV12AX7WA','SOV2A3',10,21,NULL,'',NULL,3,4,1);
-INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_id_language`) VALUES (14,'OV6550WE','SOV2AOV',10,51,NULL,'',NULL,3,4,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (1,'SPECTALIZER','SPZ1',10,7657,NULL,'44 x 37 x 10',NULL,1,1,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (2,'SPECTALIZERII','SPZ2',10,10257,NULL,'45 x 39 x 15',NULL,1,1,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (3,'SPECTALIZERIII','SPZ3',10,5880,NULL,'40 x 32 x 12',NULL,1,1,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (4,'ALTABOR','ENC01',10,6242,NULL,' 22 x 99 x 35',NULL,1,2,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (5,'KUB','ENC02',10,3055,NULL,'',NULL,1,2,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (6,'ANTHEM 12','CANT10',10,283,NULL,'2 x 1m',NULL,2,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (7,'ANTHEM 11','CANT11',10,232,NULL,'2 x 1m',NULL,2,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (8,'ANTHEM 10','CANT12',10,241,NULL,'2 x 2m',NULL,2,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (9,'WILDLIGHT','CAB11',10,113,NULL,'2 X 2m',NULL,4,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (10,'CM07','CAB01',10,290,NULL,'2 x 1m',NULL,1,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (11,'CM04','CAB02',10,120,NULL,'2 X 2m',NULL,1,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (12,'SPECTACNX','CAB03',10,280,NULL,'2 x 8m',NULL,1,3,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (13,'SOV12AX7WA','SOV2A3',10,21,NULL,'',NULL,3,4,1);
+INSERT INTO `article` (`id_article`,`name`,`reference`,`quantity`,`public_price`,`weight`,`dimension`,`picture`,`manufacturer_id_manufacturer`,`article_category_code`,`article_category_language_idlanguage`) VALUES (14,'OV6550WE','SOV2AOV',10,51,NULL,'',NULL,3,4,1);
 
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (1,1,'Plus petit, plus fort, plus que parfait et moins cher ! Le tout nouvel amplificateur multimédia, la puissance de la gamme Spectalizer alliée aux nouveautés les plus en point du moment.\nL\'architecture Push Pull UHC MOS a été améliorée faisant de notre nouvel ampli le phare de notre gamme. Du côté connectique: rien à redire puisque tous les types de connexion sont présents.\nEnfin, le design n\'a pas été oublié et l\'on ne pourra plus rien reprocher à Spectasonic sur ce point.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (2,2,'Le SPECTALIZER II est le produit phase de SPECTASONIC.\nVéritable légende de la stéréo, l\'ampli intégré PMA-2010AE est équipé d\'un circuit d\'alimentation surdimensionné et se dote de diodes de redressement Schottky associées à des condensateurs de forte capacité pour un stockage et un transfert d\'énergie considérables. Avec ses étages de puissance simple Push-Pull UHC-MOS, le SPECTALIZER II restitue aussi bien le plus subtil solo de violon que le fortissimo le plus grandiose, point culminant d\'une oeuvre symphonique.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (3,3,'Le SPECTALIZER III est le nouveau bébé de Marc Poinson, ingénieur et magicien du son.\nQualité de fabrication, finition exemplaire, composants de très haute volée, le SPECTALIZER III répond aux exigences des audiophiles les plus intransigeants en leur offrant un amplificateur très abouti digne des meilleures productions. A associer de préférence avec des enceintes haut de gamme au rendement élevé.\n\nDans sa version SPECTALIZER III E, notre amplificateur est dôté de deux sorties SPDIF pour l\'intégrer dans votre chaine de home cinéma.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (4,4,'L\'enceinte haut de gamme ALTABOR se distingue grâce à  la conception de son tweeter débafflé. Le tweeter, ainsi isolé, offre une image sonore améliorée, une meilleure dispersion, et un son plus ample et plus naturel.\nLa conception exclusive dite « double dôme » du tweeter limite les distorsions provenant de la bobine dans les plus hautes fréquences. Le résultat élève le niveau de détail et de précision dans les fréquences les plus élevées, mais aussi, et surtout, dans la gamme de spectre audible.\nDéplacer ainsi le tweeter à l\'extérieur du coffret  offre plus d\'espace intérieur pour un troisième haut-parleur de graves. Ce haut-parleur supplémentaire permet à l\'ALTABOR d\'avoir des basses plus puissantes, de réduire la distorsion et d\'étendre la réponse dans le grave - quel que soit le niveau sonore auquel vous aimez écouter.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (5,5,'Le caisson de basse KUB est un caisson de basses haut de gamme et ultra performant doté d\'un haut-parleur de 30.5cm et d\'une amplification Ultra-Class-D de 300W RMS montant à 900W en crête !',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (6,6,'Crimson câble VEE 3 est une conception de câble pseudo-balanced/symmetrical. Il existe deux ensembles de multi-brins oxygène conducteurs en cuivre libres, un ensemble utilisé pour le signal et l\'autre ensemble pour le retour. Le conducteurs sont torsadés et sont isolés avec une faible densité, le polyéthylène à faible perte. Jaquette utiliser la configuration pseudo-équilibrée parce qu\'il porte des signaux de plus de précision que d\'un câble coaxial ou asymétrique simple. Le conducteurs sont maintenus en place avec deux vibrations entretoises de coton d\'amortissement. Réduire les vibrations internes et externes est extrêmement important pour la qualité du signal.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (7,7,'Crimson câble VEE 3 est une conception de câble pseudo-balanced/symmetrical. Il existe deux ensembles de multi-brins oxygène conducteurs en cuivre libres, un ensemble utilisé pour le signal et l\'autre ensemble pour le retour. Le conducteurs sont torsadés et sont isolés avec une faible densité, le polyéthylène à faible perte. Jaquette utiliser la configuration pseudo-équilibrée parce qu\'il porte des signaux de plus de précision que d\'un câble coaxial ou asymétrique simple. Le conducteurs sont maintenus en place avec deux vibrations entretoises de coton d\'amortissement. Réduire les vibrations internes et externes est extrêmement important pour la qualité du signal.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (8,8,'Crimson câble VEE 3 est une conception de câble pseudo-balanced/symmetrical. Il existe deux ensembles de multi-brins oxygène conducteurs en cuivre libres, un ensemble utilisé pour le signal et l\'autre ensemble pour le retour. Le conducteurs sont torsadés et sont isolés avec une faible densité, le polyéthylène à faible perte. Jaquette utiliser la configuration pseudo-équilibrée parce qu\'il porte des signaux de plus de précision que d\'un câble coaxial ou asymétrique simple. Le conducteurs sont maintenus en place avec deux vibrations entretoises de coton d\'amortissement. Réduire les vibrations internes et externes est extrêmement important pour la qualité du signal.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (9,9,'Câble de modulation à gde vitesse de transmission, RCA plaqués or',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (10,10,'Conduction en fils de litz OFC RCA plaqués or ',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (11,11,'Conduction en fils de litz OFC RCA plaqués or ',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (12,12,'Conduction en fils de litz OFC RCA plaqués or ',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (13,13,'8 amplis sur 10 utilisent cette lampe qui bien qu\'économique n´en est pas moins efficace. Lampe multi-usage par définition, elle atteindra ses limites quand on lui demandera une grosse saturation.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (14,14,'Si vous voulez upgrader votre ampli sur base EL34, n´hésitez pas une seconde :\nvous allez gagner en définition, graves plus précis, dynamique plus grande.\nInconvénients: ces lampes chauffent beaucoup, il faut les isoler. Des modifications importantes doivent être réalisées par un technicien agrée car ici nous sortons d´un simple réglage de bias.',NULL,1);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (15,1,'Smaller, stronger, more perfect and cheaper! The newest multimedia amplifier, the power of the Spectalizer range combined with the latest innovations of the moment.\nThe Push Pull UHC MOS architecture has been upgraded making our new amp the flagship of our range. On the connection side: nothing to complain about since all types of connection are present.\nFinally, the design has not been forgotten and we can no longer blame Spectasonic on this point.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (16,2,'SPECTALIZER II is the phase product of SPECTASONIC.\nA true legend of stereo, the PMA-2010AE\'s built-in amplifier is equipped with an oversized power supply circuit and is equipped with Schottky rectifier diodes and high capacitance capacitors for considerable energy storage and transfer. With its single UHC-MOS Push-Pull power stages, the SPECTALIZER II brings together the finest violin solo as well as the most magnificent fortissimo, the culmination of a symphonic work.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (17,3,'The SPECTALIZER III is the new baby of Marc Poinson, engineer and sound magician.\nQuality of manufacture, exemplary finishing, components of very high flight, the SPECTALIZER III meets the requirements of the most intransigent audiophiles by offering them a very successful amplifier worthy of the best productions. To be combined with high-end, high-performance speakers.\n\nIn its SPECTALIZER III E version, our amplifier is equipped with two SPDIF outputs to integrate it into your home theater system.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (18,4,'The high-end ALTABOR speaker is distinguished by the design of its tweeter unfolded. The tweeter, thus isolated, offers an improved sound image, better dispersion, and a more ample and natural sound.\nThe tweeter\'s exclusive \"double dome\"\" design limits distortions from the coil in the highest frequencies. The result raises the level of detail and precision in the highest frequencies',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (19,5,'The KUB subwoofer is a high-end, high-performance subwoofer with a 30.5cm loudspeaker and 300W RMS Ultra-Class-D amplification up to 900W peak!',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (20,6,'Crimson cable VEE 3 is a pseudo-balanced / symmetrical cable design. There are two sets of free copper conductor oxygen strands, one set used for the signal and the other set for the return. The conductors are twisted and are insulated with low density, low loss polyethylene. Jacket use the pseudo-balanced configuration because it carries signals more accurate than a single coaxial or asymmetric cable. The conductors are held in place with two damping cotton spacers vibrations. Reducing internal and external vibration is extremely important for signal quality.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (21,7,'Crimson cable VEE 3 is a pseudo-balanced / symmetrical cable design. There are two sets of free copper conductor oxygen strands, one set used for the signal and the other set for the return. The conductors are twisted and are insulated with low density, low loss polyethylene. Jacket use the pseudo-balanced configuration because it carries signals more accurate than a single coaxial or asymmetric cable. The conductors are held in place with two damping cotton spacers vibrations. Reducing internal and external vibration is extremely important for signal quality.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (22,8,'Crimson cable VEE 3 is a pseudo-balanced / symmetrical cable design. There are two sets of free copper conductor oxygen strands, one set used for the signal and the other set for the return. The conductors are twisted and are insulated with low density, low loss polyethylene. Jacket use the pseudo-balanced configuration because it carries signals more accurate than a single coaxial or asymmetric cable. The conductors are held in place with two damping cotton spacers vibrations. Reducing internal and external vibration is extremely important for signal quality.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (23,9,'High-speed transmission modulation cable, RCA gold-plated',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (24,10,'Conduction in gold plated RCA RCA wire',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (25,11,'Conduction in gold plated RCA RCA wire',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (26,12,'Conduction in gold plated RCA RCA wire',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (27,13,'8 out of 10 amps use this lamp which, although economical, is no less effective. Multi-purpose lamp by definition, it will reach its limits when it will be asked a big saturation.',NULL,2);
-INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_id_language`) VALUES (28,14,'If you want to upgrade your amp on base EL34, do not hesitate a second:\nYou will win in definition, bass more accurate, bigger dynamic.\nDisadvantages: these lamps heat a lot, they must be isolated. Important modifications must be made by a certified technician because here we come out of a simple bias setting.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (1,1,'Plus petit, plus fort, plus que parfait et moins cher ! Le tout nouvel amplificateur multimédia, la puissance de la gamme Spectalizer alliée aux nouveautés les plus en point du moment.\nL\'architecture Push Pull UHC MOS a été améliorée faisant de notre nouvel ampli le phare de notre gamme. Du côté connectique: rien à redire puisque tous les types de connexion sont présents.\nEnfin, le design n\'a pas été oublié et l\'on ne pourra plus rien reprocher à Spectasonic sur ce point.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (2,2,'Le SPECTALIZER II est le produit phase de SPECTASONIC.\nVéritable légende de la stéréo, l\'ampli intégré PMA-2010AE est équipé d\'un circuit d\'alimentation surdimensionné et se dote de diodes de redressement Schottky associées à des condensateurs de forte capacité pour un stockage et un transfert d\'énergie considérables. Avec ses étages de puissance simple Push-Pull UHC-MOS, le SPECTALIZER II restitue aussi bien le plus subtil solo de violon que le fortissimo le plus grandiose, point culminant d\'une oeuvre symphonique.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (3,3,'Le SPECTALIZER III est le nouveau bébé de Marc Poinson, ingénieur et magicien du son.\nQualité de fabrication, finition exemplaire, composants de très haute volée, le SPECTALIZER III répond aux exigences des audiophiles les plus intransigeants en leur offrant un amplificateur très abouti digne des meilleures productions. A associer de préférence avec des enceintes haut de gamme au rendement élevé.\n\nDans sa version SPECTALIZER III E, notre amplificateur est dôté de deux sorties SPDIF pour l\'intégrer dans votre chaine de home cinéma.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (4,4,'L\'enceinte haut de gamme ALTABOR se distingue grâce à  la conception de son tweeter débafflé. Le tweeter, ainsi isolé, offre une image sonore améliorée, une meilleure dispersion, et un son plus ample et plus naturel.\nLa conception exclusive dite « double dôme » du tweeter limite les distorsions provenant de la bobine dans les plus hautes fréquences. Le résultat élève le niveau de détail et de précision dans les fréquences les plus élevées, mais aussi, et surtout, dans la gamme de spectre audible.\nDéplacer ainsi le tweeter à l\'extérieur du coffret  offre plus d\'espace intérieur pour un troisième haut-parleur de graves. Ce haut-parleur supplémentaire permet à l\'ALTABOR d\'avoir des basses plus puissantes, de réduire la distorsion et d\'étendre la réponse dans le grave - quel que soit le niveau sonore auquel vous aimez écouter.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (5,5,'Le caisson de basse KUB est un caisson de basses haut de gamme et ultra performant doté d\'un haut-parleur de 30.5cm et d\'une amplification Ultra-Class-D de 300W RMS montant à 900W en crête !',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (6,6,'Crimson câble VEE 3 est une conception de câble pseudo-balanced/symmetrical. Il existe deux ensembles de multi-brins oxygène conducteurs en cuivre libres, un ensemble utilisé pour le signal et l\'autre ensemble pour le retour. Le conducteurs sont torsadés et sont isolés avec une faible densité, le polyéthylène à faible perte. Jaquette utiliser la configuration pseudo-équilibrée parce qu\'il porte des signaux de plus de précision que d\'un câble coaxial ou asymétrique simple. Le conducteurs sont maintenus en place avec deux vibrations entretoises de coton d\'amortissement. Réduire les vibrations internes et externes est extrêmement important pour la qualité du signal.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (7,7,'Crimson câble VEE 3 est une conception de câble pseudo-balanced/symmetrical. Il existe deux ensembles de multi-brins oxygène conducteurs en cuivre libres, un ensemble utilisé pour le signal et l\'autre ensemble pour le retour. Le conducteurs sont torsadés et sont isolés avec une faible densité, le polyéthylène à faible perte. Jaquette utiliser la configuration pseudo-équilibrée parce qu\'il porte des signaux de plus de précision que d\'un câble coaxial ou asymétrique simple. Le conducteurs sont maintenus en place avec deux vibrations entretoises de coton d\'amortissement. Réduire les vibrations internes et externes est extrêmement important pour la qualité du signal.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (8,8,'Crimson câble VEE 3 est une conception de câble pseudo-balanced/symmetrical. Il existe deux ensembles de multi-brins oxygène conducteurs en cuivre libres, un ensemble utilisé pour le signal et l\'autre ensemble pour le retour. Le conducteurs sont torsadés et sont isolés avec une faible densité, le polyéthylène à faible perte. Jaquette utiliser la configuration pseudo-équilibrée parce qu\'il porte des signaux de plus de précision que d\'un câble coaxial ou asymétrique simple. Le conducteurs sont maintenus en place avec deux vibrations entretoises de coton d\'amortissement. Réduire les vibrations internes et externes est extrêmement important pour la qualité du signal.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (9,9,'Câble de modulation à gde vitesse de transmission, RCA plaqués or',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (10,10,'Conduction en fils de litz OFC RCA plaqués or ',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (11,11,'Conduction en fils de litz OFC RCA plaqués or ',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (12,12,'Conduction en fils de litz OFC RCA plaqués or ',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (13,13,'8 amplis sur 10 utilisent cette lampe qui bien qu\'économique n´en est pas moins efficace. Lampe multi-usage par définition, elle atteindra ses limites quand on lui demandera une grosse saturation.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (14,14,'Si vous voulez upgrader votre ampli sur base EL34, n´hésitez pas une seconde :\nvous allez gagner en définition, graves plus précis, dynamique plus grande.\nInconvénients: ces lampes chauffent beaucoup, il faut les isoler. Des modifications importantes doivent être réalisées par un technicien agrée car ici nous sortons d´un simple réglage de bias.',NULL,1);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (15,1,'Smaller, stronger, more perfect and cheaper! The newest multimedia amplifier, the power of the Spectalizer range combined with the latest innovations of the moment.\nThe Push Pull UHC MOS architecture has been upgraded making our new amp the flagship of our range. On the connection side: nothing to complain about since all types of connection are present.\nFinally, the design has not been forgotten and we can no longer blame Spectasonic on this point.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (16,2,'SPECTALIZER II is the phase product of SPECTASONIC.\nA true legend of stereo, the PMA-2010AE\'s built-in amplifier is equipped with an oversized power supply circuit and is equipped with Schottky rectifier diodes and high capacitance capacitors for considerable energy storage and transfer. With its single UHC-MOS Push-Pull power stages, the SPECTALIZER II brings together the finest violin solo as well as the most magnificent fortissimo, the culmination of a symphonic work.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (17,3,'The SPECTALIZER III is the new baby of Marc Poinson, engineer and sound magician.\nQuality of manufacture, exemplary finishing, components of very high flight, the SPECTALIZER III meets the requirements of the most intransigent audiophiles by offering them a very successful amplifier worthy of the best productions. To be combined with high-end, high-performance speakers.\n\nIn its SPECTALIZER III E version, our amplifier is equipped with two SPDIF outputs to integrate it into your home theater system.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (18,4,'The high-end ALTABOR speaker is distinguished by the design of its tweeter unfolded. The tweeter, thus isolated, offers an improved sound image, better dispersion, and a more ample and natural sound.\nThe tweeter\'s exclusive \"double dome\"\" design limits distortions from the coil in the highest frequencies. The result raises the level of detail and precision in the highest frequencies',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (19,5,'The KUB subwoofer is a high-end, high-performance subwoofer with a 30.5cm loudspeaker and 300W RMS Ultra-Class-D amplification up to 900W peak!',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (20,6,'Crimson cable VEE 3 is a pseudo-balanced / symmetrical cable design. There are two sets of free copper conductor oxygen strands, one set used for the signal and the other set for the return. The conductors are twisted and are insulated with low density, low loss polyethylene. Jacket use the pseudo-balanced configuration because it carries signals more accurate than a single coaxial or asymmetric cable. The conductors are held in place with two damping cotton spacers vibrations. Reducing internal and external vibration is extremely important for signal quality.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (21,7,'Crimson cable VEE 3 is a pseudo-balanced / symmetrical cable design. There are two sets of free copper conductor oxygen strands, one set used for the signal and the other set for the return. The conductors are twisted and are insulated with low density, low loss polyethylene. Jacket use the pseudo-balanced configuration because it carries signals more accurate than a single coaxial or asymmetric cable. The conductors are held in place with two damping cotton spacers vibrations. Reducing internal and external vibration is extremely important for signal quality.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (22,8,'Crimson cable VEE 3 is a pseudo-balanced / symmetrical cable design. There are two sets of free copper conductor oxygen strands, one set used for the signal and the other set for the return. The conductors are twisted and are insulated with low density, low loss polyethylene. Jacket use the pseudo-balanced configuration because it carries signals more accurate than a single coaxial or asymmetric cable. The conductors are held in place with two damping cotton spacers vibrations. Reducing internal and external vibration is extremely important for signal quality.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (23,9,'High-speed transmission modulation cable, RCA gold-plated',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (24,10,'Conduction in gold plated RCA RCA wire',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (25,11,'Conduction in gold plated RCA RCA wire',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (26,12,'Conduction in gold plated RCA RCA wire',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (27,13,'8 out of 10 amps use this lamp which, although economical, is no less effective. Multi-purpose lamp by definition, it will reach its limits when it will be asked a big saturation.',NULL,2);
+INSERT INTO `characteristics` (`id_characteristics`,`article_id_article`,`description`,`specification`,`language_idlanguage`) VALUES (28,14,'If you want to upgrade your amp on base EL34, do not hesitate a second:\nYou will win in definition, bass more accurate, bigger dynamic.\nDisadvantages: these lamps heat a lot, they must be isolated. Important modifications must be made by a certified technician because here we come out of a simple bias setting.',NULL,2);
 
 
 INSERT INTO `customer` (`id_customer`,`login`,`password`,`customer_name`,`email`,`name`,`phone`,`mobile`,`fax`,`function`,`admin`) VALUES (1,'vier.guillaume@enterprise.fr','0000','PASSION SON TELEVOG','vier.guillaume@enterprise.fr','VIER Guillaume',468420811,657574002,0,'Technicien',0);
