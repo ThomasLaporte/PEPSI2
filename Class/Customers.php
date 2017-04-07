@@ -45,14 +45,14 @@ class Customers {
 
    public function getPricesByCustomerId($id)
    {
-     $sql = "SELECT * FROM Price WHERE customer_id_customer = '". $id ."'";
+     $sql = "SELECT * FROM price WHERE customer_id_customer = '". $id ."'";
      $sth = $this->DB->query($sql);
      return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function addPriceCustomer($articleId, $customerId, $fixe, $pourcent)
    {
-     $sql = "INSERT INTO Price (article_id_article, customer_id_customer, fixe, pourcentage) VALUES (:articleId, :customerId, :fixe, :pourcent)";
+     $sql = "INSERT INTO price (article_id_article, customer_id_customer, fixe, pourcentage) VALUES (:articleId, :customerId, :fixe, :pourcent)";
 
     $array = array(
       ':articleId' => $articleId,
