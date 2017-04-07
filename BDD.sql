@@ -1,5 +1,5 @@
 create database pepsi2 DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_unicode_ci ;
-
+use pepsi2;
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -71,8 +71,8 @@ COLLATE = utf8_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `article_category` (
   `code` INT(11) NOT NULL,
-  `name` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
-  `description` LONGTEXT CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `name` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
+  `description` LONGTEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
   `language_id_language` INT(11) NOT NULL,
   PRIMARY KEY (`code`, `language_id_language`),
   INDEX `fk_article_category_language1_idx` (`language_id_language` ASC),
@@ -91,13 +91,13 @@ COLLATE = utf8_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `article` (
   `id_article` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
-  `reference` VARCHAR(20) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `name` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
+  `reference` VARCHAR(20) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
   `quantity` INT(3) NOT NULL,
   `public_price` INT(6) NOT NULL,
   `weight` FLOAT NULL DEFAULT NULL,
-  `dimension` VARCHAR(50) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `picture` VARCHAR(50) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `dimension` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
+  `picture` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
   `manufacturer_id_manufacturer` INT(11) NOT NULL,
   `article_category_code` INT(11) NOT NULL,
   `article_category_language_id_language` INT(11) NOT NULL,
@@ -176,7 +176,7 @@ COLLATE = utf8_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `type_adress` (
   `id_type_address` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(25) CHARACTER SET 'utf8' NOT NULL,
+  `name` VARCHAR(25) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
   PRIMARY KEY (`id_type_address`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -188,9 +188,9 @@ COLLATE = utf8_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `customer_adress` (
   `id_adress` INT(11) NOT NULL AUTO_INCREMENT,
-  `adress` VARCHAR(80) CHARACTER SET 'utf8' NOT NULL,
+  `adress` VARCHAR(80) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
   `postal_code` INT(11) NOT NULL,
-  `city` VARCHAR(50) CHARACTER SET 'utf8' NOT NULL,
+  `city` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL,
   `longitude` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
   `latitude` VARCHAR(50) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
   `country` INT(5) NOT NULL,
