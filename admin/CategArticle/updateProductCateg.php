@@ -1,7 +1,7 @@
 
-<?php include "../Class/Functions.php";
+<?php include "../../Class/Functions.php";
 
-    require_once "../header.html";
+    require_once "../../header.php";
     $lstFunctions = new Functions();
     $currentCateg = $lstFunctions->getProductCategByID($_GET['categ']);
 

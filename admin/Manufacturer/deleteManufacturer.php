@@ -1,4 +1,4 @@
-<?php   include '../Class/Functions.php';
+<?php   include '../../Class/Functions.php';
 
 
   if(isset($_GET['manufacturer'])){

@@ -1,5 +1,5 @@
 <?php
-include '../Class/Functions.php';
+include '../../Class/Functions.php';
 
     if(isset($_GET['lang'])){
       $lstFunctions = new Functions();

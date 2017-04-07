@@ -1,6 +1,6 @@
 <?php
-  include "../Class/Functions.php";
-  require_once "../header.html";
+  include "../../Class/Functions.php";
+  require_once "../../header.php";
 
 
   $lstFunctions = new Functions();
@@ -9,8 +9,9 @@
   {
       $isAdmin = 0;
       if(isset($_POST['customerAdmin'])){$isAdmin = 1;}
-      $lstFunctions->addCustomer($_POST['customerLogin'], sha1($_POST['customerPassword']), $_POST['customerCompanyName'],$_POST['customerName'],$_POST['customerEmail'],
-                                 $_POST['customerPhone'], $_POST['customerMobile'], $_POST['customerFax'], $_POST['customerFunction'], $isAdmin);
+      echo "TEST";
+       var_dump($lstFunctions->addCustomer($_POST['customerLogin'], sha1($_POST['customerPassword']), $_POST['customerCompanyName'],$_POST['customerName'],$_POST['customerEmail'],
+                                 $_POST['customerPhone'], $_POST['customerMobile'], $_POST['customerFax'], $_POST['customerFunction'], $isAdmin));
 
       // foreach ($lstLanguages as $language) {
       //     $lstFunctions->addArticleCategorie($_POST['categName'.$language['idlanguage']], $codeValue, $language['idlanguage'], $_POST['productDesc'.$language['idlanguage']]);

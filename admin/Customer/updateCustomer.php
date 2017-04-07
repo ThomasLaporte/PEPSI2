@@ -1,6 +1,6 @@
 <?php
-    include "../Class/Functions.php";
-    require_once "../header.html";
+    include "../../Class/Functions.php";
+    require_once "../../header.php";
 
     $lstFunctions = new Functions();
     if(isset($_GET['customer']))

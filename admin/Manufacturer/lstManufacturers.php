@@ -1,7 +1,7 @@
-<?php include "../Class/Functions.php";
-    require_once "../header.html";
+<?php include "../../Class/Functions.php";
+    require_once "../../header.php";
 
-  $content = "<br><h3>List of manufacturer</h3>";
+  $content = "<br><h3>Liste des fournisseurs</h3>";
   $content .=  "<table>";
 
   $content .=  "<tr>";

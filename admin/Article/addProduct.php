@@ -57,8 +57,8 @@ $content = "<div class=\"wrap\">";
         $content .= "<input type=\"text\" name=\"productName\"  class=\"back_input_name\">";
         $content .= "<p class=\"article_products_display_details_title\">Description</p>";
         foreach ($lstFunctions->getLanguages() as $language) {
-                $content .= $language['name']." description: <textarea name=\"productDesc".$language['idlanguage']."\"></textarea>";
-                $content .= $language['name']." specification: <textarea name=\"productSpec".$language['idlanguage']."\"></textarea>";
+                $content .= $language['name']." description: <textarea name=\"productDesc".$language['id_language']."\"></textarea>";
+                $content .= $language['name']." specification: <textarea name=\"productSpec".$language['id_language']."\"></textarea>";
             }
         $content .= "<input type=\"submit\" class=\"upload-submit\" value=\"Ajouter\">";
 

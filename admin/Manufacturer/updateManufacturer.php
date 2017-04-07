@@ -1,5 +1,5 @@
-<?php   include '../Class/Functions.php';
-        require_once '../header.html';
+<?php   include '../../Class/Functions.php';
+        require_once '../../header.html';
 
     if(isset($_GET['manufacturer']))
     {

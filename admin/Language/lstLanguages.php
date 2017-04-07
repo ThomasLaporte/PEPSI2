@@ -1,8 +1,6 @@
-<?php include "../Class/Functions.php";
-    require_once "../header.html";
+<?php include "../../Class/Functions.php";
+    require_once "../../header.php";
 
-
-  $content = "";
   $lstFunctions = new Functions();
 
   if(isset($_POST['addLanguage']) && strlen($_POST['addLanguage']) > 0) // si il existe et n'est pas vide
@@ -11,7 +9,7 @@
       unset($_POST['addLanguage']);
   }
 
-  $content .= "<br><h3>List of languages</h3>";
+  $content = "<br><h3>List of languages</h3>";
   $content .=  "<table>";
 
   $content .=  "<tr>";
