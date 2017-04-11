@@ -18,11 +18,11 @@ $lstFunctions = new Functions();
       </article>
       <div class="catalogue_products_wrap">
       <article class="article_products_display">
-          <a href="#" class="article_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
+          <a href="showArticleCateg.php?categ=<?php echo $categ['code']; ?>" class="article_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
           <div class="article_products_display_details">
               <p class="article_products_display_details_title"><?php echo $categ['name']; ?></p>
               <p><?php echo $categ['description']; ?></p>
-              <a href="liste.php"><button>Voir</button></a>
+              <a href="showArticleCateg.php?categ=<?php echo $categ['code']; ?>"><button>Voir</button></a>
           </div>
       </article>
       </div>
