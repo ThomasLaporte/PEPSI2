@@ -1,5 +1,5 @@
 <!doctype html>
-
+<?php session_start(); ?>
 <html lang="fr">
 
 <head>
@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title><?php echo $title_page ?></title>
+    <title><?php echo $title_page; ?></title>
 
-    <?php if(file_exists('../css/style.css')){ echo "<link rel=\"stylesheet\" href=\"../css/style.css\">"; } else {echo "<link rel=\"stylesheet\" href=\"../../css/style.css\">";}?>
+    <?php if(file_exists('../css/style.css')){ echo "<link rel=\"stylesheet\" href=\"../css/style.css\">"; } elseif(file_exists('../../css/style.css')) {echo "<link rel=\"stylesheet\" href=\"../../css/style.css\">";} else {echo "<link rel=\"stylesheet\" href=\"css/style.css\">";}?>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -23,7 +23,7 @@
 <body id="top">
 
 <header class="wow fadeInDown">
-    <?php if(file_exists('../img/logo.png')){ echo "<a href=\"index.php\" class=\"logo\"><img src=\"../img/logo.png\"/></a>"; } else {echo "<a href=\"index.php\" class=\"logo\"><img src=\"../../img/logo.png\"/></a>";}?>
+    <?php if(file_exists('../img/logo.png')){ echo "<a href=\"index.php\" class=\"logo\"><img src=\"../img/logo.png\"/></a>"; } elseif(file_exists('../../img/logo.png')) {echo "<a href=\"index.php\" class=\"logo\"><img src=\"../../img/logo.png\"/></a>";} else {echo "<a href=\"index.php\" class=\"logo\"><img src=\"img/logo.png\"/></a>";}?>
 
 <nav class="horizontal">
     <a href="javascript:void(0);" class="js-modal-close_login" id="open_menu"><i class="fa fa-bars"></i></a>
