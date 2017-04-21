@@ -1,5 +1,11 @@
 <!doctype html>
-<?php session_start(); ?>
+<?php session_start();
+
+// Permet de déterminer le niveau d'accés au fichiers
+$positionInProject = "";
+if(file_exists('../index.php')){ $positionInProject = "../"; } elseif(file_exists('../../index.php')) {$positionInProject = "../../";}
+
+?>
 <html lang="fr">
 
 <head>
@@ -9,7 +15,8 @@
 
     <title><?php echo $title_page; ?></title>
 
-    <?php if(file_exists('../css/style.css')){ echo "<link rel=\"stylesheet\" href=\"../css/style.css\">"; } elseif(file_exists('../../css/style.css')) {echo "<link rel=\"stylesheet\" href=\"../../css/style.css\">";} else {echo "<link rel=\"stylesheet\" href=\"css/style.css\">";}?>
+    <?php echo "<link rel=\"stylesheet\" href=\"".$positionInProject."css/style.css\">";
+    //if(file_exists('../css/style.css')){ echo "<link rel=\"stylesheet\" href=\"../css/style.css\">"; } elseif(file_exists('../../css/style.css')) {echo "<link rel=\"stylesheet\" href=\"../../css/style.css\">";} else {echo "<link rel=\"stylesheet\" href=\"css/style.css\">";}?>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -23,7 +30,8 @@
 <body id="top">
 
 <header class="wow fadeInDown">
-    <?php if(file_exists('../img/logo.png')){ echo "<a href=\"index.php\" class=\"logo\"><img src=\"../img/logo.png\"/></a>"; } elseif(file_exists('../../img/logo.png')) {echo "<a href=\"index.php\" class=\"logo\"><img src=\"../../img/logo.png\"/></a>";} else {echo "<a href=\"index.php\" class=\"logo\"><img src=\"img/logo.png\"/></a>";}?>
+    <?php echo "<a href=\"".$positionInProject."index.php\" class=\"logo\"><img src=\"".$positionInProject."/img/logo.png\"/></a>";
+    //if(file_exists('../img/logo.png')){ echo "<a href=\"index.php\" class=\"logo\"><img src=\"../img/logo.png\"/></a>"; } elseif(file_exists('../../img/logo.png')) {echo "<a href=\"index.php\" class=\"logo\"><img src=\"../../img/logo.png\"/></a>";} else {echo "<a href=\"index.php\" class=\"logo\"><img src=\"img/logo.png\"/></a>";}?>
 
 <nav class="horizontal">
     <a href="javascript:void(0);" class="js-modal-close_login" id="open_menu"><i class="fa fa-bars"></i></a>
@@ -35,12 +43,12 @@
     <div class="modal-box_menu">
         <div class="modal-body_menu">
             <ul>
-                <li><a class="nav_horizontal_a" href="index.php">Accueil</a></li>
-                <li><a class="nav_horizontal_a" href="index.php">Produits</a></li>
-                <li><a class="nav_horizontal_a" href="index.php">Catégories</a></li>
-                <li><a class="nav_horizontal_a" href="index.php">Fabriquants</a></li>
-                <li><a class="nav_horizontal_a" href="index.php">Revendeurs</a></li>
-                <li><a class="nav_horizontal_a" href="panier.php">Langages</a></li>
+                <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>index.php">Accueil</a></li>
+                <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>Article/lstArticles.php">Produits</a></li>
+                <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>CategArticle/lstCategs.php">Catégories</a></li>
+                <!-- <li><a class="nav_horizontal_a" href="index.php">Fabriquants</a></li> -->
+                <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>Manufacturer/lstManufacturers.php">Revendeurs</a></li>
+                <!-- <li><a class="nav_horizontal_a" href="panier.php">Langages</a></li> -->
             </ul>
         </div>
         <div class="modal-footer_menu">
