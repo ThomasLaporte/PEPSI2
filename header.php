@@ -11,7 +11,7 @@ if(file_exists('../BDD.sql')){ $positionInProject = "../"; } elseif(file_exists(
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title><?php echo $title_page; echo $positionInProject;?></title>
+    <title><?php echo $title_page;?></title>
 
     <?php echo "<link rel=\"stylesheet\" href=\"".$positionInProject."css/style.css\">";?>
 
