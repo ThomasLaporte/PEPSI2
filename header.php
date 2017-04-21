@@ -3,7 +3,7 @@
 
 // Permet de déterminer le niveau d'accés au fichiers
 $positionInProject = "";
-if(file_exists('../index.php')){ $positionInProject = "../"; } elseif(file_exists('../../index.php')) {$positionInProject = "../../";}?>
+if(file_exists('../BDD.sql')){ $positionInProject = "../"; } elseif(file_exists('../../BDD.sql')) {$positionInProject = "../../";}?>
 <html lang="fr">
 
 <head>
@@ -11,7 +11,7 @@ if(file_exists('../index.php')){ $positionInProject = "../"; } elseif(file_exist
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title><?php echo $title_page; ?></title>
+    <title><?php echo $title_page; echo $positionInProject;?></title>
 
     <?php echo "<link rel=\"stylesheet\" href=\"".$positionInProject."css/style.css\">";?>
 
@@ -25,7 +25,7 @@ if(file_exists('../index.php')){ $positionInProject = "../"; } elseif(file_exist
 
 <body id="top">
   <header class="wow fadeInDown">
-     <?php echo "<a href=\"".$positionInProject."index.php\" class=\"logo\"><img src=\"".$positionInProject."/img/logo.png\"/></a>";?>
+     <?php echo "<a href=\"".$positionInProject."index.php\" class=\"logo\"><img src=\"".$positionInProject."img/logo.png\"/></a>";?>
 
     <nav class="horizontal">
         <a href="javascript:void(0);" class="js-modal-close_login" id="open_menu"><i class="fa fa-bars"></i></a>
@@ -39,7 +39,7 @@ if(file_exists('../index.php')){ $positionInProject = "../"; } elseif(file_exist
                     <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>Article/lstArticles.php">Produits</a></li>
                     <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>CategArticle/lstCategs.php">Catégories</a></li>
                     <!-- <li><a class="nav_horizontal_a" href="index.php">Fabriquants</a></li> -->
-                    <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>Manufacturer/lstManufacturers.php">Revendeurs</a></li>
+                    <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>ou-acheter.php">Revendeurs</a></li>
                     <!-- <li><a class="nav_horizontal_a" href="panier.php">Langages</a></li> -->
                 </ul>
             </div>
