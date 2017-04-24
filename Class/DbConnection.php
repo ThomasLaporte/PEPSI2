@@ -2,8 +2,8 @@
 
 class DbConnection {
     private $dsn = 'mysql:dbname=pepsi2;host=localhost';
-    private  $user = 'root';
-    private  $password = '0000';
+    private  $user = 'admin';
+    private  $password = '1234';
     private $dbh = false;
 
     function __construct() {
@@ -13,7 +13,7 @@ class DbConnection {
     public function dbConect(){
       if ( ! $this->dbh ){
         try {
-          $this->dbh = new PDO($this->dsn, $this->user, $this->password);
+          $this->dbh = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
           $this->dbh->exec('SET NAMES UTF8');
         } catch (PDOException $e) {
           die('Connexion échouée : ' . $e->getMessage());
