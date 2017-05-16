@@ -1,7 +1,10 @@
 <?php
 
 $title_page = 'Spectasonic - Panier';
-include '../header.php';
+include 'header.php';
+include "Class/Functions.php";
+
+$lstFunctions = new Functions();
 
 ?>
 
@@ -19,12 +22,16 @@ include '../header.php';
     <div class="panier_products_wrap">
     <article class="panier_products_display">
             <ul>
-            <li>Total HT<span class="prix_HT">XXX €</span></li>
-            <li class="prix_li">Produit 01<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li class="prix_li">Produit 02<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li class="prix_li">Produit 03<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li class="prix_li">Produit 04<span class="prix_HT">XXX €</span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-            <li>Total TTC<span class="prix_TTC">XXX €</span></li>
+              <?php
+              $prixHT = 0;
+              foreach ($_SESSION['panier'] as $idProd => $quantity){
+                  $currentProduct = $lstFunctions->getProductByID($idProd); ?>
+                  <li class="prix_li"><?php echo $currentProduct['name']; ?><span class="prix_HT"><?php echo intval($currentProduct['public_price']) * $quantity ."€"?></span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
+              <?php
+              $prixHT += intval($currentProduct['public_price']) * $quantity;
+              } ?>
+            <li>Total HT<span class="prix_HT"><?php echo $prixHT; ?> €</span></li>
+            <li>Total TTC<span class="prix_TTC"><?php echo $prixHT * 1.2; ?> €</span></li>
             </ul>
             <button>Payer</button>
     </article>
@@ -35,6 +42,6 @@ include '../header.php';
 
 <?php
 
-include '../footer.php';
+include 'footer.php';
 
 ?>
