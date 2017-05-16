@@ -1,33 +1,31 @@
-<?php include "../../Class/Functions.php";
-
+<?php
+    include "../../Class/Functions.php";
+    $title_page = 'Spectasonic - Catalogue Backoffice';
     require_once "../../header.php";
-    $content = "";
 
+    $content = "<br><h3>Liste des produits</h3>";
+    $content .=  "<table>";
 
-  $content .= "<br><h3>List of products</h3>";
-  $content .=  "<table>";
+    $content .=  "<tr>";
+      $content .=  "<th></th>";
+      $content .=  "<th>Nom produit</td>";
+      $content .=  "<th></th>";
+    $content .=  "</tr>";
 
-  $content .=  "<tr>";
-    $content .=  "<th>Product Name</td>";
-    $content .=  "<th></th>";
-  $content .=  "</tr>";
+    $lstFunctions = new Functions();
 
-  $lstFunctions = new Functions();
+    foreach ($lstFunctions->getProducts() as $product) {
+      $content .= "<tr>";
+        $content .= "<td><a href=../Article/deleteProduct.php?product=".$product['id_article']."> X </a></td>";
+        $content .= "<td>". $product['name']."</td>";
+        $content .= "<td><a href=../Article/updateProduct.php?product=".$product['id_article'].">Modifier</a></td>";
+      $content .= "</tr>";
+    }
 
-  foreach ($lstFunctions->getProducts() as $product) {
-    $content .= "<tr>";
-      $content .= "<td><a href=../Article/deleteProduct.php?product=".$product['id_article'].">-</a></td>";
-      $content .= "<td>". $product['name']."</td>";
-      $content .= "<td><a href=../Article/updateProduct.php?product=".$product['id_article'].">Modifier</a></td>";
-    $content .= "</tr>";
-  }
+    $content .=  "</table>";
+    $content .= "<a href=addProduct.php><input type=\"submit\" class=\"upload-submit\" value=\"Ajouter produit\"></a>";
 
-  $content .=  "</table>";
-$content .= "<a href=../Article/addProduct.php>Ajouter produit</a>";
-
-
-
-echo $content;
+    echo $content;
   ?>
 
 
