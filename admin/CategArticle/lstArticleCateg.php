@@ -27,8 +27,5 @@ $lstFunctions = new Functions();
   $content .= "<a href=addCategArticle.php><input type=\"submit\" class=\"upload-submit\" value=\"Ajouter catégorie\"></a>";
 
   echo $content;
+  include '../../footer.php';
   ?>
-
-
-</body>
-</html>

@@ -58,4 +58,7 @@
     }
   else {
     header("Location: lstArticleCateg.php");
-  } ?>
+  }
+
+  include '../../footer.php';
+  ?>
