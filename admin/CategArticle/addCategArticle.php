@@ -20,7 +20,7 @@
         foreach ($lstLanguages as $language) {
             $lstFunctions->addArticleCategorie($_POST['categName'.$language['id_language']], $codeValue, $language['id_language'], $_POST['categDesc'.$language['id_language']]);
         }
-        ?><script>alert("Ajout de la cétgorie effectué avec succés ! ");</script><?php
+        ?><script>alert("Ajout de la catégorie effectué avec succés ! ");</script><?php
       }
       else {
         ?><script>alert("Veuillez vérifier que le nom de la catégorie est bien saisie dans toutes les langues ! ");</script><?php
