@@ -9,32 +9,33 @@
     if(isset($_GET['categ']) && !empty($currentCateg)){
 
         // Vérification des champs avant update
-        $validUpdate = 0;
-        foreach ($currentCateg as $categ) {
-          if(isset($_POST["categName". $categ['language_id_language']]) && strlen($_POST["categName". $categ['language_id_language']]) > 0)
+        if(isset($_POST["updateBtn"]))
+        {
+          $validUpdate = 0;
+          foreach ($currentCateg as $categ) {
+            if(isset($_POST["categName". $categ['language_id_language']]) && strlen($_POST["categName". $categ['language_id_language']]) > 0)
+            {
+              $validUpdate++;
+            }
+          }
+
+          // SI tous les champs NOM d'une catégorie sont OK --> UPDATE
+          if($validUpdate == count($currentCateg))
           {
-            $validUpdate++;
+            foreach ($currentCateg as $categ) {
+                $lstFunctions->updateProductCateg($_GET['categ'], $_POST["categName". $categ['language_id_language']], $categ['language_id_language'], $_POST["categDesc". $categ['language_id_language']]);
+            }
+           header("Location: lstArticleCateg.php");
+          }
+          else {
+            ?> <script>alert("Au moins un champs NOM d'une catégorie n'est pas correctement saisie ! ");</script> <?php
           }
         }
-
-      // SI tous les champs NOM d'une catégorie sont OK --> UPDATE
-      if($validUpdate == count($currentCateg))
-      {
-        foreach ($currentCateg as $categ) {
-            $lstFunctions->updateProductCateg($_GET['categ'], $_POST["categName". $categ['language_id_language']], $categ['language_id_language'], $_POST["categDesc". $categ['language_id_language']]);
-       }
-       header("Location: lstArticleCateg.php");
-      }
-      else {
-        ?> <script>alert("Au moins un champs NOM d'une catégorie n'est pas correctement saisie ! ");</script> <?php
-      }
-
     ?>
       <form method="post">
         <div class="wrap">
 
         <h1 class="wow fadeIn">Mise à jour d'une catégorie</h1>
-
           <section class="catalogue_products wow fadeInUp">
               <div class="catalogue_products_wrap back">
             <?php foreach ($currentCateg as $categ) {
@@ -48,7 +49,7 @@
                         </div>
                     </article>
               <?php } ?>
-                <button>Modifier</button>
+                <button name="updateBtn">Modifier</button>
               </div>
           </section>
         </div>
