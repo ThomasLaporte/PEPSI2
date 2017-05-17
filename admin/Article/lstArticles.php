@@ -2,6 +2,7 @@
     include "../../Class/Functions.php";
     $title_page = 'Spectasonic - Catalogue Backoffice';
     require_once "../../header.php";
+    $lstFunctions = new Functions();
 
     $content = "<br><h3>Liste des produits</h3>";
     $content .=  "<table>";
@@ -12,7 +13,6 @@
       $content .=  "<th></th>";
     $content .=  "</tr>";
 
-    $lstFunctions = new Functions();
 
     foreach ($lstFunctions->getProducts() as $product) {
       $content .= "<tr>";
@@ -26,8 +26,5 @@
     $content .= "<a href=addProduct.php><input type=\"submit\" class=\"upload-submit\" value=\"Ajouter produit\"></a>";
 
     echo $content;
+    include '../../footer.php';
   ?>
-
-
-  </body>
-</html>

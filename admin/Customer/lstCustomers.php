@@ -1,32 +1,26 @@
 <?php
   include "../../Class/Functions.php";
+  $title_page = 'Spectasonic - Catalogue Backoffice';
   require_once "../../header.php";
 
-  $content = "<br><h3>Liste des clients</h3>";
-  $content .=  "<table>";
+  $lstFunctions = new Functions();?>
 
-  $content .=  "<tr>";
-    $content .=  "<th></th>";
-    $content .=  "<th>Nom client</th>";
-  $content .=  "</tr>";
+  <h3>Liste des clients</h3>
+  <a href=addCustomer.php><input type="submit" class="upload-submit" value="Ajouter produit"></a>
+  <table>
+    <tr>
+      <th></th>
+      <th>Nom client</th>
+    </tr><?php
 
-  $lstFunctions = new Functions();
+   foreach ($lstFunctions->getCustomers() as $customer) {?>
+     <tr>
+        <td><a href="deleteCustomer.php?customer=<?php echo $customer['id_customer'];?>"> X </a></td>
+        <td><?php echo $customer['customer_name'];?></td>
+        <td><a href="updateCustomer.php?customer=<?php echo $customer['id_customer'];?>">Modifier utilisateur</a></td>
+        <td><a href="customerReductions.php?customer=<?php echo $customer['id_customer'];?>">Réductions</a></td>
+     </tr><?php
+   }?>
+  </table>
 
-  foreach ($lstFunctions->getCustomers() as $customer) {
-    $content .= "<tr>";
-      $content .= "<td><a href=deleteCustomer.php?customer=".$customer['id_customer'].">-</a></td>";
-      $content .= "<td>". $customer['customer_name']."</td>";
-      $content .= "<td><a href=updateCustomer.php?customer=".$customer['id_customer'].">Modifier utilisateur</a></td>";
-      $content .= "<td><a href=customerReductions.php?customer=".$customer['id_customer'].">Réductions</a></td>";
-    $content .= "</tr>";
-  }
-
-  $content .=  "</table>";
-  $content .= "<a href=../Article/addProduct.php>Ajouter produit</a>";
-
-  echo $content;
-?>
-
-
-  </body>
-</html>
+  <?php include '../../footer.php';

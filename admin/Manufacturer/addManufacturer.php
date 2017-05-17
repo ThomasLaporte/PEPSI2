@@ -1,42 +1,51 @@
-<?php   include '../../Class/Functions.php';
-        require_once '../../header.php';
+<?php
+  include '../../Class/Functions.php';
+  $title_page = 'Spectasonic - Catalogue Backoffice';
+  require_once '../../header.php';
 
-    $lstFunctions = new Functions();
+  $lstFunctions = new Functions();
 
-    // Si l'utilisateur clic sur le bouton valider apres avoir fait ses modifications
-    if(isset($_POST['manufacturerName']))
+    if(isset($_POST['addBtn']))
     {
-
-      //print_r($lstFunctions->addManufacturer($_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'],$_POST['manufacturerCountry']));
        if($lstFunctions->addManufacturer($_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'],$_POST['manufacturerCountry'])){ // $_POST['productCateg']
           ?> <script>alert("Ajout effectué avec succés ! ");</script><?php
         }
         else {
-          echo "Probleme rencontré lors de l'ajout du produit dans la bdd";
+          ?> <script>alert("Problème rencontré lors de l'ajout ! ");</script><?php
         }
-      unset($_POST['manufacturerName']);
+      unset($_POST['addBtn']);
     }
-
-    $content = "<h1>Ajout d'un nouveau Fournisseur</h1>";
-    $content .= "<form method=\"post\">";
-    $content .= "Raison sociale: <input type=\"text\" name=\"manufacturerName\"><br>";
-    $content .= "Adresse:<input type=\"text\" name=\"manufacturerAdress\"><br>";
-    $content .= "Code Postal:<input type=\"text\" name=\"manufacturerPostal\"><br>";
-    $content .= "Ville: <input type=\"text\" name=\"manufacturerCity\"><br>";
-
-
-    $content .= "Pays: <select name=\"manufacturerCountry\">";
-    foreach ($lstFunctions->getCountries() as $country) {
-      $content .= "<option value=\"".$country['id']."\">".$country['nom_en_gb']."</option>";
-    }
-    $content .= "</select></br>";
-
-    $content .="<input type=\"submit\" value=\"Submit\">";
-    $content .="</form>";
-    echo $content;
-
     ?>
+    <form method="post">
+      <div class="wrap">
+      <h1 class="wow fadeIn">Ajout d'un fournisseur</h1>
+        <section class="catalogue_products wow fadeInUp">
+            <div class="catalogue_products_wrap back">
+                  <article class="article_products_display">
+                      <div class="article_products_display_details">
+                        <p class="article_products_display_details_title">Raison sociale :</p>
+                        <input name="manufacturerName" required class="back_input_name" type="text" value="">
+                        <p class="article_products_display_details_title">Adresse :</p>
+                        <input name="manufacturerAdress" required class="back_input_name" type="text" value="">
+                        <p class="article_products_display_details_title">Code Postal :</p>
+                        <input name="manufacturerPostal" required class="back_input_name" type="text" value="">
+                        <p class="article_products_display_details_title">Ville :</p>
+                        <input name="manufacturerCity" required class="back_input_name" type="text" value="">
 
+                        <p class="article_products_display_details_title">Pays :</p>
+                        <select name="manufacturerCountry"><?php
+                        foreach ($lstFunctions->getCountries() as $country) {?>
+                          <option value="<?php echo $country['id']; ?>"><?php echo $country['nom_fr_fr']; ?></option><?php
+                        }?>
+                        </select>";
+                      </div>
+                  </article>
+              <button name="addBtn">Ajouter</button>
+            </div>
+        </section>
+      </div>
+    </form>
 
-  </body>
-  </html>
+    <?php
+    include '../../footer.php';
+    ?>

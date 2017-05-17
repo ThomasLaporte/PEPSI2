@@ -1,5 +1,7 @@
-<?php include "../../Class/Functions.php";
-    require_once "../../header.php";
+<?php
+  include "../../Class/Functions.php";
+  $title_page = 'Spectasonic - Catalogue Backoffice';
+  require_once "../../header.php";
 
   $lstFunctions = new Functions();
 
@@ -8,32 +10,25 @@
       $lstFunctions->addLanguage($_POST['addLanguage']);
       unset($_POST['addLanguage']);
   }
+?>
+  <h1>Liste des langages</h1>
+  <table>
+    <tr>
+      <th></th>
+      <th>Langues</th>
+    </tr>
 
-  $content = "<br><h3>List of languages</h3>";
-  $content .=  "<table>";
+    <?php
+      foreach ($lstFunctions->getLanguages() as $language) { ?>
+        <tr>
+          <td><a href="deleteLanguage.php?lang=<?php echo $language['id_language'];?>"> X </a></td>
+          <td><?php echo $language['name'];?></td>
+        </tr><?php
+      }?>
+  </table>
+  <form method="post">
+    <input name="addLanguage" id="addLanguage" type="text">  <input type="submit" value="Ajouter langue" name="btnAddLanguage">
+  </form>
 
-  $content .=  "<tr>";
-    $content .=  "<th>Language title</th>";
-  $content .=  "</tr>";
-
-
-  // Le parametre correspond a la langue : par defaut Francais (id 1)
-  foreach ($lstFunctions->getLanguages() as $language) {
-    $content .= "<tr>";
-      $content .= "<td><a href=\"deleteLanguage.php?lang=".$language['id_language']."\">-</a></td>";
-      $content .= "<td>". $language['name']."</td>";
-    $content .= "</tr>";
-  }
-  $content .=  "</table>";
-  $content .= "<form method=\"post\">";
-  $content .= "<input name=\"addLanguage\" id=\"addLanguage\" type=\"text\">  <input type=\"submit\" value=\"Ajouter langue\" name=\"btnAddLanguage\">";
-
-  $content .= "</form>";
-
-
-  echo $content;
-  ?>
-
-
-</body>
-</html>
+<?php
+  include '../../footer.php';

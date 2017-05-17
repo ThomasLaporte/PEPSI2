@@ -1,81 +1,96 @@
-<?php   include '../../Class/Functions.php';
-        require_once '../../header.php';?>
+<?php
+$title_page = 'Spectasonic - Ajout';
+require_once "../../header.php";
 
-    <?php
+include "../../Class/Functions.php";
+
     $lstFunctions = new Functions();
     $languages = $lstFunctions->getLanguages();
+
     // Si l'utilisateur clic sur le bouton valider apres aviur fait ses modifications
-    if(isset($_POST['productName']) &&  isset($_POST['productQuantity']))
+    if(isset($_POST['productName']) && $_POST['productName'] != "" && $_POST['productQuantity'])
     {
-       $productId = $lstFunctions->addProduct($_POST['productName'], $_POST['productRef'], $_POST['productQuantity'],$_POST['productPrice'],$_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'], $_POST['productCateg'], 1);
+      if(!isset($_POST['productRef'])) $_POST['productRef'] = 'NULL';
+      if(!isset($_POST['productPrice'])) $_POST['productPrice'] = 'NULL';
+      if(!isset($_POST['productWeight']) || $_POST['productWeight'] == '') $_POST['productWeight'] = '0';
+      if(!isset($_POST['productSize'])) $_POST['productSize'] = 'NULL';
+      if(!isset($_POST['productPicture'])) $_POST['productPicture'] = 'NULL';
 
-       foreach ($languages as $language) {
-         $lstFunctions->addCharacteristic($productId, $_POST["productDesc".$language['idlanguage']], $_POST["productSpec".$language['idlanguage']], $language['idlanguage'] );
-       }
-       header('Location : lstArticles.php');
+
+      $productId = $lstFunctions->addProduct($_POST['productName'], $_POST['productRef'], $_POST['productQuantity'],$_POST['productPrice'],$_POST['productWeight'],$_POST['productSize'],$_POST['productPicture'],$_POST['productManufacturer'], $_POST['productCateg'], 1);
+      foreach ($languages as $language) {
+        $lstFunctions->addCharacteristic($productId,
+                                        (isset($_POST["productDesc".$language['id_language']]))? 	$_POST["productDesc".$language['id_language']] : "",
+                                        (isset($_POST["productSpec".$language['id_language']]))? 	$_POST["productSpec".$language['id_language']] : "",
+                                        $language['id_language'] );
+      }
     }
+?>
 
-//HEAD
+<div class="wrap">
 
-$content = "<div class=\"wrap\">";
-    $content .= "<h1 class=\"wow fadeIn\">Ajouter un produit</h1>";
-    $content .= "<section class=\"catalogue_products wow fadeInUp\">";
+<h1 class="wow fadeIn">Ajout d'un produit</h1>
 
-//FORM
+<section class="catalogue_products wow fadeInUp">
+  <form method="post">
+    <article class="catalogue_products_title back">
 
-    $content .= "<article class=\"catalogue_products_title back\">";
+            <label>REF :</label>
+            <input type="text" name="productRef" id="productRef" value="">
+            <label>TVA :</label>
+            <input type="text" value="20%">
+            <label>Prix HT :</label>
+            <input type="text" required name="productPrice" value="">
+            <label>En stock :</label>
+            <input type="text" required name="productQuantity" value="">
+            <label>Fabriquant :</label>
+            <select name="productManufacturer">
+              <?php
+              foreach ($lstFunctions->getManufacturers() as $manufacturer) {?>
 
-    $content .= "<form method=\"post\">";
-        $content .= "<label>Référence :</label><input type=\"text\" name=\"productRef\">";
-        $content .= "<label>Prix HT :</label><input type=\"text\" name=\"productPrice\">";
-        $content .= "<label>Quantité :</label><input type=\"number\" name=\"productQuantity\">";
-        $content .= "<label>Fabricant :</label><select name=\"productManufacturer\">";
-            foreach ($lstFunctions->getManufacturers() as $manufacturer) {
-              $content .= "<option value=\"".$manufacturer['id_manufacturer']."\">".$manufacturer['name']."</option>";
-            }
-        $content .= "</select>";
-        $content .= "<label>Dimensions :</label><input type=\"text\" name=\"productSize\">";
-        $content .= "<label>Poids (en Kg) :</label><input type=\"number\" step=\"0.1\" name=\"productWeight\">";
-        $content .= "<label>Catégorie :</label><select name=\"productCateg\" id=\"productCateg\">";
-            foreach ($lstFunctions->getProductsCategs() as $categProduct) {
-              $content .= "<option value=\"".$categProduct['code']."\">".$categProduct['name']."</option>";
-            }
-        $content .= "</select>";
-        $content .= "<label for=\"file\" class=\"label-file\">Choisir une image</label><input type=\"file\" name=\"productPicture\" id=\"file\" class=\"input-file\">";
+                <option value="<?php echo $manufacturer['id_manufacturer']; ?>"> <?php echo $manufacturer['name']; ?></option>
+              <?php } ?>
+            </select>
+            <label>Dimensions :</label>
+            <input type="text" name="productSize" value="">
+            <label>Poids :</label>
+            <input type="text" name="productWeight" value="">
 
-    $content .= "</form>";
-    $content .= "</article>";
+            <label>Catégorie :</label>
+            <select name="productCateg">
+              <?php
+              foreach ($lstFunctions->getProductsCategsByLang(1) as $categProduct) {
+                ?><option value="<?php echo $categProduct['code']; ?>"> <?php echo $categProduct['name']; ?></option><?php
+              }?>
+            </select>
+            <label for="file" class="label-file">Choisir une image</label>
+            <input id="file" name="productPicture" class="input-file" type="file">
 
-//DISPLAY
+    </article>
+    <div class="catalogue_products_wrap back">
+    <article class="article_products_display">
+        <a href="#" class="article_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
+        <div class="article_products_display_details">
+          <p class="article_products_display_details_title">Nom de l'article</p>
+          <input class="back_input_name" required type="text" name="productName" value="">
+          <?php foreach ($languages as $language) {?>
+                <h3><?php echo $language['name'];?></h3>
+                <p class="article_products_display_details_title">Description : <?php echo $language['name']; ?></p>
+                <textarea name="productDesc<?php echo $language['id_language']; ?>"></textarea>
+                <p class="article_products_display_details_title">Specification : <?php echo $language['name']; ?></p>
+                <textarea name="productSpec<?php echo $language['id_language']; ?>"></textarea>
+                <hr>
+              <?php
+          }?>
 
-    $content .= "<div class=\"catalogue_products_wrap back\">";
-    $content .= "<article class=\"article_products_display\">";
-    $content .= "<i class=\"fa fa-cloud-upload fa-5x upload-icon\" aria-hidden=\"true\"></i>";
-    $content .= "<div class=\"article_products_display_details\">";
-    $content .= "<p class=\"article_products_display_details_title\">Nom article</p>";
+            <button id='button'>Ajouter</button>
+        </div>
+      </article>
+    </div>
+  </form>
+</section>
 
-        $content .= "<input type=\"text\" name=\"productName\"  class=\"back_input_name\">";
-        $content .= "<p class=\"article_products_display_details_title\">Description</p>";
-        foreach ($lstFunctions->getLanguages() as $language) {
-                $content .= $language['name']." description: <textarea name=\"productDesc".$language['id_language']."\"></textarea>";
-                $content .= $language['name']." specification: <textarea name=\"productSpec".$language['id_language']."\"></textarea>";
-            }
-        $content .= "<input type=\"submit\" class=\"upload-submit\" value=\"Ajouter\">";
-
-    $content .= "</div>";
-    $content .= "</article>";
-    $content .= "</div>";
-    $content .= "</section>";
-
-$content .= "</div>";
-
-//
-
-    echo $content;
-
-    ?>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="../js/script.js"></script>
-  </body>
-  </html>
+</div>
+<?php
+include '../../footer.php';
+?>

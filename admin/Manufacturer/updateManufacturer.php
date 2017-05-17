@@ -1,48 +1,54 @@
-<?php   include '../../Class/Functions.php';
-        require_once '../../header.html';
+<?php
+  include '../../Class/Functions.php';
+  $title_page = 'Spectasonic - Catalogue Backoffice';
+  require_once "../../header.php";
 
-    if(isset($_GET['manufacturer']))
+  if(isset($_GET['manufacturer']))
+  {
+    $lstFunctions = new Functions();
+    $currentManufacturer = $lstFunctions->getManufacturerById($_GET['manufacturer']);
+
+    if(isset($_POST["updateBtn"]))
     {
-      $lstFunctions = new Functions();
-
-      // Si l'utilisateur clic sur le bouton valider apres avoir fait ses modifications
-      if(isset($_POST["manufacturerName"]) && strlen($_POST["manufacturerName"]) > 0)
-      {
-          $lstFunctions->updateManufacturer($_GET['manufacturer'], $_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'], $_POST['manufacturerCountry']);
-          header("Location: lstManufacturers.php");
-      }
-      // else {
-      //    <script>alert("Veuillez renseigner l'ensemble des champs ! ");</script> <?php
-      //   unset($_POST['manufacturerName']);
-      // }
-
-      $currentManufacturer = $lstFunctions->getManufacturerById($_GET['manufacturer']);
-
-      $content = "<h1>Modification d'un fournisseur</h1>";
-      $content .= "<form method=\"post\">";
-      $content .= "Raison sociale: <input type=\"text\" name=\"manufacturerName\" value=\"".$currentManufacturer['name']."\"><br>";
-      $content .= "Adresse:<input type=\"text\" name=\"manufacturerAdress\" value=\"".$currentManufacturer['adress']."\"><br>";
-      $content .= "Code Postal:<input type=\"text\" name=\"manufacturerPostal\" value=\"".$currentManufacturer['postal_code']."\"><br>";
-      $content .= "Ville: <input type=\"text\" name=\"manufacturerCity\" value=\"".$currentManufacturer['city']."\"><br>";
-
-
-      $content .= "Pays: <select name=\"manufacturerCountry\">";
-      foreach ($lstFunctions->getCountries() as $country) {
-        $isSelected = "";
-        if($country['id'] == $currentManufacturer['country']){$isSelected = "Selected";}
-        $content .= "<option value=\"".$country['id']."\" ".$isSelected.">".$country['nom_en_gb']."</option>";
-      }
-      $content .= "</select></br>";
-
-      $content .="<input type=\"submit\" value=\"Valider\">";
-      $content .="</form>";
-      echo $content;
+        $lstFunctions->updateManufacturer($_GET['manufacturer'], $_POST['manufacturerName'], $_POST['manufacturerAdress'], $_POST['manufacturerPostal'], $_POST['manufacturerCity'], $_POST['manufacturerCountry']);
+        unset($_POST["updateBtn"]);
+        header("Location: lstManufacturers.php");
     }
-    else {
-      header("Location: lstManufacturers.php");
-    }
-    ?>
+?>
+  <form method="post">
+    <div class="wrap">
+    <h1 class="wow fadeIn">Ajout d'un fournisseur</h1>
+      <section class="catalogue_products wow fadeInUp">
+          <div class="catalogue_products_wrap back">
+                <article class="article_products_display">
+                    <div class="article_products_display_details">
+                      <p class="article_products_display_details_title">Raison sociale :</p>
+                      <input name="manufacturerName" required class="back_input_name" type="text" value="<?php echo $currentManufacturer['name'];?>">
+                      <p class="article_products_display_details_title">Adresse :</p>
+                      <input name="manufacturerAdress" required class="back_input_name" type="text" value="<?php echo $currentManufacturer['adress'];?>">
+                      <p class="article_products_display_details_title">Code Postal :</p>
+                      <input name="manufacturerPostal" required class="back_input_name" type="text" value="<?php echo $currentManufacturer['postal_code'];?>">
+                      <p class="article_products_display_details_title">Ville :</p>
+                      <input name="manufacturerCity" required class="back_input_name" type="text" value="<?php echo $currentManufacturer['city'];?>">
 
+                      <p class="article_products_display_details_title">Pays :</p>
+                      <select name="manufacturerCountry"><?php
+                      foreach ($lstFunctions->getCountries() as $country) {?>
+                        <option value="<?php echo $country['id']; ?>" <?php echo (($country['id'] == $currentManufacturer['country'])? "Selected" : "");?>><?php echo $country['nom_fr_fr']; ?></option><?php
+                      }?>
+                      </select>
+                    </div>
+                </article>
+            <button name="updateBtn">Modifier</button>
+          </div>
+      </section>
+    </div>
+  </form>
 
-  </body>
-  </html>
+<?php
+  }
+  else {
+    header("Location: lstManufacturers.php");
+  }
+  include '../../footer.php';
+  ?>
