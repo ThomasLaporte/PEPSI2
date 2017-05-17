@@ -1,16 +1,15 @@
 <?php
   include '../../Class/Functions.php';
+  $title_page = 'Spectasonic - Backoffice';
   require_once '../../header.php';
 
     $lstFunctions = new Functions();
-
     $lstLanguages = $lstFunctions->getLanguages();
     $isComplete = true;
-    if(isset($_POST['SubmitBtn'])) // si il existe et n'est pas vide
+    if(isset($_POST['AddBtn'])) // si il existe et n'est pas vide
     {
-
       foreach ($lstLanguages as $language) {
-          if(!isset($_POST['categName'.$language['idlanguage']])){
+          if(!isset($_POST['categName'.$language['id_language']])){
             $isComplete = false;
           }
       }
@@ -19,64 +18,41 @@
         $codeValue = intval($lstFunctions->getMaxCodeFromCategProd()['MAX(code)']) +1;
 
         foreach ($lstLanguages as $language) {
-            $lstFunctions->addArticleCategorie($_POST['categName'.$language['idlanguage']], $codeValue, $language['idlanguage'], $_POST['productDesc'.$language['idlanguage']]);
+            $lstFunctions->addArticleCategorie($_POST['categName'.$language['id_language']], $codeValue, $language['id_language'], $_POST['categDesc'.$language['id_language']]);
         }
-
+        ?><script>alert("Ajout de la cétgorie effectué avec succés ! ");</script><?php
       }
+      else {
+        ?><script>alert("Veuillez vérifier que le nom de la catégorie est bien saisie dans toutes les langues ! ");</script><?php
+      }
+      unset($_POST['AddBtn']);
     }
 
+?>
+    <form method="post">
+      <div class="wrap">
 
+      <h1 class="wow fadeIn">Ajout d'une nouvelle catégorie</h1>
+        <section class="catalogue_products wow fadeInUp">
+            <div class="catalogue_products_wrap back">
+          <?php
 
+            foreach ($lstLanguages as $language) {?>
+                    <article class="article_products_display">
+                        <div class="article_products_display_details">
+                            <h3><?php echo $language['name'];?></h3>
+                            <p class="article_products_display_details_title">Nom catégorie :</p>
+                            <input name="categName<?php echo $language['id_language'];?>" class="back_input_name" type="text" value="">
+                            <p class="article_products_display_details_title">Description :</p>
+                            <textarea name="categDesc<?php echo $language['id_language'];?>"></textarea>
+                        </div>
+                    </article>
+                    <hr>
+            <?php } ?>
+              <button name="AddBtn">Ajouter</button>
+            </div>
+        </section>
+      </div>
+    </form>
 
-
-    $content = "<h2>Ajout d'une nouvelle catégorie</h2>";
-    $content .= "<form method=\"post\">";
-
-    foreach ($lstLanguages as $language) {
-        $content .= $language['name']." name of the new category: <input type=\"text\" name=\"categName".$language['idlanguage']."\"><br><br>";
-        $content .= $language['name']." description: <textarea rows=\"4\" cols=\"50\" name=\"productDesc".$language['idlanguage']."\"></textarea><br>";
-        $content .="<hr>";
-    }
-
-
-  //  $content .= "Nom de la catégorie: <input type=\"text\" name=\"categName\"><br>";
-
-    // $content .= "Langue de la catégorie: <select name=\"languageCateg\" id=\"languageCateg\">";
-    // foreach ($lstFunctions->getLanguages() as $language) {
-    //   $content .= "<option value=\"".$language['idlanguage']."\">".$language['name']."</option>";
-    // }
-    //
-    // $content .= "</select></br>";
-
-    $content .= "<input type=\"submit\" value=\"Submit\" name=\"SubmitBtn\">";
-    $content .= "</form>";
-    echo $content;
-
-    ?>
-
-  </body>
-  </html>
-
-
-
-
-<!-- // $name= $_POST['name'];
-//
-// if (isset($name)){
-//   require_once '/Class/Functions.php';
-//   $lstFunctions = new Functions();
-//
-//   $lstFunctions->addArticleCategorie($name);
-// }
-
-
-
-
-if(isset($_GET['categName'])){
-
-  $lstFunctions = new Functions();
-
-  $lstFunctions->addArticleCategorie($_GET['categName']);
-
-}
-header('Location:http://127.0.0.1/pepsi2-backoffice/addProduct.php'); -->
+<?php require_once '../../footer.php'; ?>
