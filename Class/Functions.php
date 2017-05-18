@@ -192,6 +192,11 @@ Class Functions{
     return $this->customers->getPricesByCustomerId($id);
   }
 
+  function deleteCustomerPrice($idCustomer, $idArticle)
+  {
+    return $this->customers->deleteCustomerPrice($idCustomer, $idArticle);
+  }
+
   function addPriceCustomer($articleId, $customerId, $fixe, $pourcent)
   {
     return $this->customers->addPriceCustomer($articleId, $customerId, $fixe, $pourcent);

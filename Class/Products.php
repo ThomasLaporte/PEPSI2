@@ -108,7 +108,6 @@ class Products {
         ':desc' => $desc,
         ':spec' => $spec,
         ':idLanguage' => $idLanguage);
-
       return $this->DB->query($sql, $array);
 
      }

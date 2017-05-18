@@ -50,6 +50,17 @@ class Customers {
      return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
+   public function deleteCustomerPrice($idCustomer, $idArticle)
+   {
+     $sql = "DELETE FROM price WHERE customer_id_customer= :idCustomer AND article_id_article= :idPrice LIMIT 1";
+
+     $array = array(
+       ':idCustomer' => $idCustomer,
+       ':idPrice' => $idArticle);
+
+      return $this->DB->query($sql, $array);
+   }
+
    public function addPriceCustomer($articleId, $customerId, $fixe, $pourcent)
    {
      $sql = "INSERT INTO price (article_id_article, customer_id_customer, fixe, pourcentage) VALUES (:articleId, :customerId, :fixe, :pourcent)";
@@ -69,7 +80,7 @@ class Customers {
      "FROM pepsi2.customer_adress As a, pepsi2.type_adress As t ".
      "WHERE a.type_adress_id_type_address = t.id_type_address ".
      "AND a.customer_id_customer = '". $customerId ."'";
-    //  $sql = "SELECT * FROM customer_adress WHERE customer_id_customer = '". $customerId ."'";
+
      $sth = $this->DB->query($sql);
      return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
@@ -112,9 +123,19 @@ class Customers {
 
    public function addCustomerAdress($idCustomer, $adress, $postal, $city, $country, $adressType)
    {
+     $sql = "INSERT INTO customer_adress (adress, postal_code, city, country, type_adress_id_type_address, customer_id_customer) ".
+            "VALUES (:adress, :postalCode, :city, :country, :typeAdress, :customerId)";
 
+    $array = array(
+      ':adress' => $adress,
+      ':postalCode' => $postal,
+      ':city' => $city,
+      ':country' => $country,
+      ':typeAdress' => $adressType,
+      ':customerId' => $idCustomer);
+
+    return $this->DB->query($sql, $array);
    }
-
 
    public function deleteCustomer($idCustomer)
    {
