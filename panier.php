@@ -17,7 +17,7 @@ $lstFunctions = new Functions();
         <h2>Gérer votre panier</h2>
         <p>Gérer votre panier ici.</p>
         <p>Vous pouvez supprimer des articles et visualiser le total HT et TTC.</p>
-        <p>Votre panier n'est valable que 15 minutes.</p>
+        <p>TVA appliquée : 20%</p>
     </article>
     <div class="panier_products_wrap">
     <article class="panier_products_display">
@@ -30,6 +30,7 @@ $lstFunctions = new Functions();
               <?php
               $prixHT += intval($currentProduct['public_price']) * $quantity;
               } ?>
+            <hr>
             <li>Total HT<span class="prix_HT"><?php echo $prixHT; ?> €</span></li>
             <li>Total TTC<span class="prix_TTC"><?php echo $prixHT * 1.2; ?> €</span></li>
             </ul>

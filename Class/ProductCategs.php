@@ -11,8 +11,7 @@ class ProductCategs {
    {
      $sql = "SELECT code, name FROM article_category";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function getProductsCategsByLang($idlanguage)
@@ -22,16 +21,14 @@ class ProductCategs {
        ':idLanguage' => $idlanguage);
 
      $sth = $this->DB->query($sql, $array);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function getLastCodeFromCategProd()
    {
      $sql = "SELECT MAX(code) FROM article_category";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetch(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetch(PDO::FETCH_ASSOC);
    }
 
    public function addArticleCateg($name, $code, $idLanguage, $description)
@@ -45,7 +42,6 @@ class ProductCategs {
       ':desc' => $description);
 
     return $this->DB->query($sql, $array);
-
    }
 
    public function getProductCategByID($categID)
@@ -55,13 +51,12 @@ class ProductCategs {
        ':categId' => $categID);
 
      $sth = $this->DB->query($sql, $array);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function deleteProductCateg($id)
    {
-     $sql = "DELETE FROM article_category WHERE code = :id";
+     $sql = "DELETE FROM article_category WHERE code = :id LIMIT 1";
 
      $array = array(
        ':id' => $id);
@@ -71,17 +66,15 @@ class ProductCategs {
 
    public function updateProductCateg($id, $name, $idLanguage, $description)
    {
-     $sql = "UPDATE article_category SET name = :name, description = :desc ".
+      $sql = "UPDATE article_category SET name = :name, description = :desc ".
             "WHERE code = :id AND language_id_language = :languageId LIMIT 1";
 
-    $array = array(
-      ':name' => $name,
-      ':languageId' => $idLanguage,
-      ':id' => $id,
-      ':desc' => $description);
+      $array = array(
+        ':name' => $name,
+        ':languageId' => $idLanguage,
+        ':id' => $id,
+        ':desc' => $description);
 
-    return $this->DB->query($sql, $array);
-
+      return $this->DB->query($sql, $array);
    }
-
  }

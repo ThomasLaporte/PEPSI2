@@ -23,8 +23,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -34,7 +34,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -98,7 +98,7 @@ header {
     background: @b;
     margin-bottom: 50px;
     position: relative;
-    
+
     .logo {
         width: 250px;
         height: 50px;
@@ -117,13 +117,13 @@ header {
     top: 10px;
     text-align: right;
     z-index: 9999;
-    
+
     a {
         color: @w;
         text-align: right;
         text-decoration: none;
     }
-    
+
     .login_input {
         display: none;
         position: relative;
@@ -171,7 +171,7 @@ nav {
     transition: @transition;
     height: 30px;
     width: 30px;
-    
+
     &:hover {
         color: @bl;
         transition: @transition;
@@ -186,7 +186,7 @@ nav {
     transition: @transition;
     height: 30px;
     width: 30px;
-    
+
     &:hover {
         color: @bl;
         transition: @transition;
@@ -221,34 +221,34 @@ nav {
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-clip: padding-box;
-    
+
     input {
         width: 100%;
     }
-    
+
     .login_submit {
         color: @w;
         transition: @transition;
-        
+
         &:hover {
             color: @bl;
             transition: @transition;
         }
     }
-    
+
     ul {
         list-style-type: none;
-        
+
         li {
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
             font-size: 3rem;
-            
+
             a {
                 color: @w;
                 transition: @transition;
-                
+
                 &:hover {
                     color: @bl;
                     transition: @transition;
@@ -276,12 +276,12 @@ nav {
     text-decoration: none;
     color: @w;
     transition: @transition;
-    
+
     &:hover {
         color: @bl;
         transition: @transition;
     }
-    
+
     i {
         font-size: 3rem;
     }
@@ -327,7 +327,7 @@ h1 {
     height: auto;
     margin: 50px auto;
     display: flex;
-    
+
     .catalogue_products_title {
         width: 250px;
         height: auto;
@@ -335,7 +335,7 @@ h1 {
         padding-left: 20px;
         background: @g;
         margin-right: 70px;
-        
+
         h2 {
             font-size: @sh2;
             font-weight: @bold;
@@ -343,42 +343,42 @@ h1 {
             margin-bottom: 30px;
             max-width: 90%;
         }
-    
+
         p {
             font-size: @sp;
             color: @w;
             max-width: 90%;
             line-height: 1.25em;
         }
-        
+
         ul {
             color: @w;
-            
+
             li {
                 margin: 0 auto;
             }
         }
     }
-    
+
     .catalogue_products_wrap {
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
         width: 70%;
     }
-    
+
     .catalogue_products_display {
         width: 250px;
         height: 350px;
         margin-right: 25px;
         margin-bottom: 50px;
-        
+
         .catalogue_img_link {
             width: 250px;
             height: 175px;
             display: block;
             overflow: hidden;
-            
+
             img {
                 -webkit-transition: @transition;
                 transition: @transition;
@@ -386,37 +386,37 @@ h1 {
                 height: 100%;
             }
         }
-        
+
         p {
             font-size: @sp;
             color: @b;
         }
-        
+
         .catalogue_products_display_details {
             width: 250px;
             height: 175px;
             background: @w;
-            
+
             .catalogue_products_display_details_title {
                 font-weight: @bold;
                 font-size: 16px;
                 margin-bottom: 0;
             }
-            
+
             p {
                 padding: 20px 20px 0 20px;
                 line-height: 1.25em;
             }
         }
     }
-    
+
     .panier_products_wrap {
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
         width: 90%;
     }
-    
+
     .panier_products_display {
         width: 100%;
         height: auto;
@@ -424,37 +424,37 @@ h1 {
         padding-top: 30px;
         padding-left: 20px;
         padding-right: 20px;
-        
+
         ul {
-            
+
             li {
-                
+
             }
-            
+
             li:last-child {
                 font-weight: bold;
                 margin-top: 10px;
                 font-size: 1.25em;
             }
-            
+
             .prix_HT {
                 font-weight: bold;
             }
-            
+
             .prix_TTC, .prix_HT, .prix_delete {
                 float: right;
                 clear: both;
             }
-            
+
         }
-        
+
         button {
             width: 100%;
             margin-top: 25px;
         }
-            
+
     }
-    
+
     .article_products_display {
         width: 100%;
         height: auto;
@@ -463,13 +463,13 @@ h1 {
         padding-left: 20px;
         padding-right: 20px;
         background: @w;
-        
+
         .article_img_link {
             width: 100%;
             height: 350px;
             display: block;
             overflow: hidden;
-            
+
             img {
                 -webkit-transition: @transition;
                 transition: @transition;
@@ -477,45 +477,45 @@ h1 {
                 height: 100%;
             }
         }
-        
+
         p {
             font-size: @sp;
             color: @b;
         }
-        
+
         .article_products_display_details {
             width: 100%;
             height: auto;
             background: @w;
-            
+
             .article_products_display_details_title {
                 font-weight: @bold;
                 font-size: 16px;
                 margin-bottom: 0;
             }
-            
+
             p {
                 padding: 20px 20px 0 20px;
                 line-height: 1.25em;
             }
-            
+
             button {
             width: 100%;
         }
         }
     }
-    
+
     .map_products_wrap {
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
         width: 90%;
-        
+
         .map_wrapper {
             width: 100%;
             height: auto;
         }
-        
+
         .map_details {
             width: 560px;
             max-width: 560px;
@@ -524,19 +524,19 @@ h1 {
             padding-top: 30px;
             padding-left: 20px;
             padding-right: 20px;
-            
+
             ul {
-                
+
                 li {
                     height: auto;
-                    
+
                     .map_name {
                         font-weight: bold;
                         font-size: 1.25em;
                     }
                 }
             }
-           
+
         }
     }
 }
@@ -545,7 +545,7 @@ h1 {
 
 .back {
     //
-    
+
     .a_add {
         color: @w;
         margin-right: 10px;
@@ -556,7 +556,7 @@ h1 {
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         &:after {
             content: "AJOUTER";
             margin-left: 10px;
@@ -577,7 +577,7 @@ h1 {
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         &:after {
             content: "SUPPRIMER";
             margin-left: 10px;
@@ -634,7 +634,7 @@ h1 {
 }
 
 .catalogue_products_display:first-child {
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
 }
 
 .zoom {
@@ -675,7 +675,7 @@ h1 {
     }
     .map_products_wrap {
         width: 50%!important;
-        
+
         .map_wrapper {
             width: 100%;
 
@@ -698,7 +698,7 @@ h1 {
         flex-wrap: wrap;
         justify-content: center;
         margin-top: 25px!important;
-        
+
         .catalogue_products_title {
             width: 100%;
             height: auto;
@@ -716,7 +716,7 @@ h1 {
     }
     .map_products_wrap {
         width: 90%!important;
-        
+
         .map_wrapper {
             width: 100%;
 
@@ -743,5 +743,3 @@ h1 {
 @media screen and (max-width: 480px) {
 
 }
-
-

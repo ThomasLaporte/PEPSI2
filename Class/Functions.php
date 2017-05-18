@@ -41,9 +41,6 @@ Class Functions{
 
   function deleteProduct($id)
   {
-    // Suppression du detail des achats lors de la suppression d'un article
-    // $this->products->deletePrice($id);
-    // $this->products->deleteOrderDetail($id);
     return $this->products->deleteProduct($id);
   }
 
@@ -52,6 +49,12 @@ Class Functions{
     return $this->products->addProduct($name, $ref, $quantity, $price, $weight, $dimension, $picture, $manuId, $idCateg, $idLangCateg);
   }
 
+  function getProductByCateg($categId)
+  {
+      return $this->products->getProductByCateg($categId);
+  }
+
+  // Caractéristiques produit
   function addCharacteristic($articleId, $desc, $spec, $idLanguage)
   {
     return $this->products->addCharacteristic($articleId, $desc, $spec, $idLanguage);
@@ -72,14 +75,6 @@ Class Functions{
     return $this->products->getCharacteristicsByIdArticle($idArticle);
   }
 
-
-  function getProductByCateg($categId)
-  {
-      return $this->products->getProductByCateg($categId);
-  }
-
-
-
   // Fournisseurs
   function getManufacturers()
   {
@@ -88,7 +83,6 @@ Class Functions{
 
   function addManufacturer($name, $adress, $postal, $city, $country)
   {
-
     return $this->manufacturers->addManufacturer($name, $adress, $postal, $city, $country);
   }
 
@@ -107,6 +101,7 @@ Class Functions{
     return $this->manufacturers->getManufacturerById($id);
   }
 
+  // Pays
   function getCountries()
   {
     return $this->manufacturers->getCountries();
@@ -116,6 +111,7 @@ Class Functions{
   {
       return $this->manufacturers->getCountryById($id);
   }
+
   // Categorie article
   function addArticleCategorie($name, $code, $idLanguage, $desc)
   {
@@ -152,8 +148,9 @@ Class Functions{
     return $this->productCategs->getProductsCategsByLang($language);
   }
 
-  // Languages
-  function getLanguages(){
+  // Langue
+  function getLanguages()
+  {
     return $this->languages->listLanguages();
   }
 
@@ -172,6 +169,7 @@ Class Functions{
     return $this->languages->getLanguageById($id);
   }
 
+  // Clients
   function getCustomers()
   {
     return $this->customers->getCustomers();
@@ -222,11 +220,6 @@ Class Functions{
     return $this->customers->addCustomerAdress($idCustomer, $adress, $postal, $city, $country, $adressType);
   }
 
-  // function getOrdersCustomer($customerId)
-  // {
-  //   return $this->customers->getOrdersCustomer($customerId);
-  // }
-
   function deleteCustomer($customerId)
   {
      return $this->customers->deleteCustomer($customerId);
@@ -236,5 +229,4 @@ Class Functions{
   {
     return $this->customers->getAdressTypes();
   }
-
 }

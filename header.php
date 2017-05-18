@@ -35,12 +35,21 @@ if(file_exists('../BDD.sql')){ $positionInProject = "../"; } elseif(file_exists(
         <div class="modal-box_menu">
             <div class="modal-body_menu">
                 <ul>
-                    <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>index.php">Accueil</a></li>
-                    <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>Article/lstArticles.php">Produits</a></li>
-                    <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>CategArticle/lstCategs.php">Catégories</a></li>
-                    <!-- <li><a class="nav_horizontal_a" href="index.php">Fabriquants</a></li> -->
-                    <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>ou-acheter.php">Revendeurs</a></li>
-                    <!-- <li><a class="nav_horizontal_a" href="panier.php">Langages</a></li> -->
+                  <?php
+                    if($positionInProject != "../../"){?>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>index.php">Accueil</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>Article/lstArticles.php">Produits</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>CategArticle/lstCategs.php">Catégories</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>ou-acheter.php">Revendeurs</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>panier.php">Panier</a></li>
+                  <?php } else { ?>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>index.php">Accueil</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Article/lstArticles.php">Produits</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/CategArticle/lstArticleCateg.php">Catégories</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Customer/lstCustomers.php">Clients</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Language/lstLanguages.php">Langues</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Manufacturer/lstManufacturers.php">Fournisseurs</a></li>
+                  <?php } ?>
                 </ul>
             </div>
             <div class="modal-footer_menu">

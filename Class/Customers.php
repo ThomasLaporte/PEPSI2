@@ -17,8 +17,10 @@ class Customers {
 
    public function getCustomerById($id)
    {
-     $sql = "SELECT * FROM customer WHERE id_customer = '". $id ."'";
-     $sth = $this->DB->query($sql);
+     $sql = "SELECT * FROM customer WHERE id_customer = :id";
+     $array = array(
+       ':id' => $id);
+     $sth = $this->DB->query($sql, $array);
      return  $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
@@ -45,8 +47,10 @@ class Customers {
 
    public function getPricesByCustomerId($id)
    {
-     $sql = "SELECT * FROM price WHERE customer_id_customer = '". $id ."'";
-     $sth = $this->DB->query($sql);
+     $sql = "SELECT * FROM price WHERE customer_id_customer = :id";
+     $array = array(
+       ':id' => $id);
+     $sth = $this->DB->query($sql, $array);
      return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
@@ -79,9 +83,11 @@ class Customers {
      $sql = "SELECT a.*, t.name As adressType ".
      "FROM pepsi2.customer_adress As a, pepsi2.type_adress As t ".
      "WHERE a.type_adress_id_type_address = t.id_type_address ".
-     "AND a.customer_id_customer = '". $customerId ."'";
+     "AND a.customer_id_customer = :customerID";
 
-     $sth = $this->DB->query($sql);
+     $array = array(
+       ':customerID' => $customerId);
+     $sth = $this->DB->query($sql, $array);
      return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
@@ -97,7 +103,6 @@ class Customers {
       ':city' => $city,
       ':country' => $country);
 
-      var_dump($array);
     return $this->DB->query($sql, $array);
    }
 

@@ -11,14 +11,11 @@ class Manufacturers {
    {
       $sql = "SELECT * FROM manufacturer";
       $sth = $this->DB->query($sql);
-      $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-      return $rowset;
+      return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function addManufacturer($name, $adress, $postal, $city, $country)
    {
-     try {
-
        $sql = "INSERT INTO manufacturer (name, adress, postal_code, city, country) ".
               "VALUES (:name, :adress, :postalCode, :city, :country)";
 
@@ -30,10 +27,6 @@ class Manufacturers {
         ':country' => $country);
 
       return $this->DB->query($sql, $array);
-
-    } catch (Exception $e) {
-        echo "Une erreur a été rencontrée lors de l'ajout dans la base de donnée." . $e;
-    }
    }
 
    public function deleteManufacturer($id)
@@ -43,17 +36,14 @@ class Manufacturers {
      $array = array(
        ':id' => $id);
 
-      $this->DB->query($sql, $array);
-      return true;
+      return $this->DB->query($sql, $array);
    }
 
    public function getManufacturerById($id)
    {
      $sql = "SELECT * FROM manufacturer WHERE id_manufacturer ='".$id ."' LIMIT 1";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetch(PDO::FETCH_ASSOC);
-     return $rowset;
-
+     return $sth->fetch(PDO::FETCH_ASSOC);
    }
 
    public function updateManufacturer($id, $name, $adress, $postalCode, $city, $country)
@@ -80,17 +70,13 @@ class Manufacturers {
        ':idPays' => $id);
 
      $sth = $this->DB->query($sql, $array);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
 
    public function getCountries()
    {
      $sql = "SELECT * FROM pays";
      $sth = $this->DB->query($sql);
-     $rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
-     return $rowset;
+     return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
-
-
 }

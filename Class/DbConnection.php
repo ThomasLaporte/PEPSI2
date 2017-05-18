@@ -48,8 +48,6 @@ class DbConnection {
         {
           return $req;
         }
-        //   return $req;
-        // }
 
       } catch (PDOException $e) {
         die('Problème rencontré lors de l execution de la requete : ' . $e->getMessage());

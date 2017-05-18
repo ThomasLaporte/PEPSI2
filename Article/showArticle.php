@@ -49,7 +49,7 @@
               <p><?php echo $lstFunctions->getCharacteristicsByIdArticle($currentProduct['id_article'])[0]['description']; ?></p>
               <p><?php echo $lstFunctions->getCharacteristicsByIdArticle($currentProduct['id_article'])[0]['specification']; ?></p>
           </div>
-          <input type="submit" class="upload-submit" value="Ajouter" name="ajoutPanier">
+          <input type="submit" class="upload-submit" value="Ajouter au panier" name="ajoutPanier">
       </article>
       </div>
   </section>
