@@ -14,7 +14,7 @@
         <article class="catalogue_products_title back">
             <h2><?php echo $currentCateg['name']; ?></h2>
 
-            <a href="ajout.php"><i class="fa fa-times fa-2x a_delete" aria-hidden="true"></i></a>
+            <!-- <a href="ajout.php"><i class="fa fa-times fa-2x a_delete" aria-hidden="true"></i></a> -->
         </article>
         <div class="catalogue_products_wrap">
           <article class="article_products_display">
