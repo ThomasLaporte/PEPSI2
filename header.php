@@ -44,11 +44,11 @@ if(file_exists('../BDD.sql')){ $positionInProject = "../"; } elseif(file_exists(
                       <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>panier.php">Panier</a></li>
                   <?php } else { ?>
                       <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>index.php">Accueil</a></li>
-                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Article/lstArticles.php">Produits</a></li>
-                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/CategArticle/lstArticleCateg.php">Catégories</a></li>
-                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Customer/lstCustomers.php">Clients</a></li>
-                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Language/lstLanguages.php">Langues</a></li>
-                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>/admin/Manufacturer/lstManufacturers.php">Fournisseurs</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>admin/Article/lstArticles.php">Produits</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>admin/CategArticle/lstArticleCateg.php">Catégories</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>admin/Customer/lstCustomers.php">Clients</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>admin/Language/lstLanguages.php">Langues</a></li>
+                      <li><a class="nav_horizontal_a" href= "<?php echo $positionInProject; ?>admin/Manufacturer/lstManufacturers.php">Fournisseurs</a></li>
                   <?php } ?>
                 </ul>
             </div>
