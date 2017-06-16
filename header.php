@@ -60,12 +60,27 @@ if(file_exists('../BDD.sql')){ $positionInProject = "../"; } elseif(file_exists(
     <section id="login">
         <div class="modal-box_login">
             <div class="modal-body_login">
-                <input type="submit" name="submit" id="sumbit" class="login_submit" value="Deconnexion">
+              <?php
+              if(!isset($_SESSION['user'])){?>
+                <form action="<?php echo $positionInProject . "login.php"; ?>" method="POST"><?php
+
+                  if(isset($_SESSION['error'])){ ?><label style="color:white;">Votre identifiant ou votre mot de passe est incorrect.</label> <?php } ?>
+
+                  <label style="color:white;">Identifiant: </label><input type="text" value="" name="login">
+                  <label style="color:white;">Mot de passe: </label><input type="password" value="" name="pswd">
+
+                  <input type="submit" name="submit" id="sumbit" class="login_submit" value="Connexion">
+                </form>
+              <?php } else {?>
+                <form action="<?php echo $positionInProject . "logout.php"; ?>" method="post">
+                  <input type="submit" name="submit" id="sumbit" class="login_submit" value="Deconnexion">
+                </form>
+              <?php } ?>
+
             </div>
             <div class="modal-footer_login">
                 <a href="javascript:void(0);" data-no-instant class="js-modal-close_login" id="close_login"><i class="fa fa-times" aria-hidden="true"></i></a>
             </div>
         </div>
-
     </section>
   </header>
