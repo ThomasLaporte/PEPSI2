@@ -4,7 +4,6 @@ $title_page = 'Spectasonic - Où acheter';
 include 'header.php';
 
 ?>
-
 <div class="wrap">
 
 <h1 class="wow fadeIn">Où acheter</h1>
@@ -15,22 +14,61 @@ include 'header.php';
         <p>Vous trouverez ici une liste des revendeurs agrées, regroupés sur une carte.</p>
     </article>
     <div class="map_products_wrap">
-        <div class="map_wrapper">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11132.181178066243!2d4.8637927!3d45.7702825!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x77113169dcfe9ea1!2sIp-formation!5e0!3m2!1sfr!2sfr!4v1487859715175" width="600" height="450" frameborder="0" style="border:0" allowfullscreen name="map"></iframe>
-        </div>
-        <div class="map_details">
-            <ul>
-                <li><span class="map_name">Revendeur 01</span><br>Adresse<br>Pays<br><a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11132.181178066243!2d4.8637927!3d45.7702825!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x77113169dcfe9ea1!2sIp-formation!5e0!3m2!1sfr!2sfr!4v1487859715175" target="map">Voir</a></li>
-                <li><span class="map_name">Revendeur 02</span><br>Adresse<br>Pays<br><a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2718.6187251409333!2d6.588556316359232!3d47.04771197915145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478deced8dfe8a05%3A0xdb0977be3180575b!2sMorteau+Saucisse!5e0!3m2!1sfr!2sfr!4v1487860830638" target="map">Voir</a>
-                </li>
-                <li><span class="map_name">Revendeur 03</span><br>Adresse<br>Pays<br><a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21556.973390150106!2d6.765829370903269!3d47.5167586174355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4792168cd6c87ad9%3A0x409ce34b313da10!2s25200+Montb%C3%A9liard!5e0!3m2!1sfr!2sfr!4v1487860870436" target="map">Voir</a>
-                </li>
-            </ul>
-        </div>
+      <div id="map" style="width: 500px; height: 400px;"></div>
     </div>
 </section>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDMttl2DKMaqbRmQcuQtbOT00bPmq9fzY" type="text/javascript"></script>
+
+<script type="text/javascript">
+var locations=[];
+
+$.ajax({
+          url: '../Article/location.php',
+          type: 'POST',
+          async: true,
+          data: 'type=detail',
+          dataType: 'json',
+          success: function (json) {
+
+              $.each(json, function (index, value) {
+                      locations.push([json[index][0], json[index][1], json[index][2]],index)
+              });
+
+               var map = new google.maps.Map(document.getElementById('map'), {
+                 zoom: 5,
+                 center: new google.maps.LatLng(46.763062, 2.424724),
+                 mapTypeId: google.maps.MapTypeId.ROADMAP
+               });
+
+               var infowindow = new google.maps.InfoWindow();
+
+               var marker, i;
+
+               for (i = 0; i < locations.length; i++) {
+                 marker = new google.maps.Marker({
+                   position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                   map: map
+                 });
+
+                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                   return function() {
+                     infowindow.setContent(locations[i][0]);
+                     infowindow.open(map, marker);
+                   }
+                 })(marker, i));
+               }
+
+          },
+          error: function(error) {
+            console.log('erreur : ', error);
+          }
+});
+
+</script>
+
 
 <?php
 

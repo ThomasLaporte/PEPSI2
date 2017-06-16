@@ -43,7 +43,7 @@
       </article>
       <div class="catalogue_products_wrap">
       <article class="article_products_display">
-          <a class="article_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
+          <a class="article_img_link"><img src="../Image/<?php echo $currentProduct['article_category_code'];?>.png"/></a>
           <div class="article_products_display_details">
               <p class="article_products_display_details_title"><?php echo $currentProduct['name']; ?></p>
               <p><?php echo $lstFunctions->getCharacteristicsByIdArticle($currentProduct['id_article'])[0]['description']; ?></p>

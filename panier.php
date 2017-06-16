@@ -24,12 +24,14 @@ $lstFunctions = new Functions();
             <ul>
               <?php
               $prixHT = 0;
-              foreach ($_SESSION['panier'] as $idProd => $quantity){
-                  $currentProduct = $lstFunctions->getProductByID($idProd); ?>
-                  <li class="prix_li"><?php echo $currentProduct['name']; ?><span class="prix_HT"><?php echo intval($currentProduct['public_price']) * $quantity ."€"?></span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
-              <?php
-              $prixHT += intval($currentProduct['public_price']) * $quantity;
-              } ?>
+              if(isset($_SESSION['panier'])){
+                foreach ($_SESSION['panier'] as $idProd => $quantity){
+                    $currentProduct = $lstFunctions->getProductByID($idProd); ?>
+                    <li class="prix_li"><?php echo $currentProduct['name']; ?><span class="prix_HT"><?php echo intval($currentProduct['public_price']) * $quantity ."€"?></span><span class="prix_delete"><a href="javascript:void(0)" class="prix_a"><i class="fa fa-times" aria-hidden="true"></i></a></span></li>
+                <?php
+                $prixHT += intval($currentProduct['public_price']) * $quantity;
+                }
+            }?>
             <hr>
             <li>Total HT<span class="prix_HT"><?php echo $prixHT; ?> €</span></li>
             <li>Total TTC<span class="prix_TTC"><?php echo $prixHT * 1.2; ?> €</span></li>

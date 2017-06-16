@@ -7,6 +7,15 @@ class Customers {
      $this->DB = $DB;
    }
 
+   public function connectUser($login, $psw)
+   {
+     $sql = "SELECT login, admin FROM customer WHERE login = :login AND password = :pswd LIMIT 1;";
+     $array = array(
+       ':login' => $login,
+       ':pswd' => sha1($psw));
+      $sth = $this->DB->query($sql, $array);
+      return $sth->fetchAll(PDO::FETCH_ASSOC);
+   }
 
    public function getCustomers()
    {
@@ -158,4 +167,11 @@ class Customers {
         $sth = $this->DB->query($sql);
         return $sth->fetchAll(PDO::FETCH_ASSOC);
    }
+	public function listCustomerMap()
+	 {
+		$sql = "SELECT c.id_customer,c.customer_name, ca.adress,ca.postal_code, ca.city ,ca.latitude as longitude,ca.longitude as latitude FROM customer c inner join customer_adress ca on ca.customer_id_customer=c.id_customer where ca.longitude is not  null and ca.latitude is not null";
+		$sth = $this->DB->query($sql);
+		$rowset = $sth->fetchAll(PDO::FETCH_ASSOC);
+		return $rowset;
+	 }
  }

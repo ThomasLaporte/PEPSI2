@@ -24,6 +24,12 @@ Class Functions{
     $this->customers = new Customers($this->_DB);
   }
 
+  // Vérif connexion
+  function connectUser($login, $psw)
+  {
+    return $this->customers->connectUser($login, $psw);
+  }
+
   // Produits
   function getProducts()
   {
@@ -228,5 +234,9 @@ Class Functions{
   function getAdressTypes()
   {
     return $this->customers->getAdressTypes();
+  }
+  function getCustomerMap()
+  {
+    return $this->customers->listCustomerMap();
   }
 }
