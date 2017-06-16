@@ -39,7 +39,7 @@ include "../../Class/Functions.php";
 <h1 class="wow fadeIn">Mise à jour produit</h1>
 
 <section class="catalogue_products wow fadeInUp">
-  <form method="post">
+  <form method="post" class="form-product">
     <article class="catalogue_products_title back">
         <h2><?php echo $currentProduct['name']; ?></h2>
 
@@ -73,10 +73,8 @@ include "../../Class/Functions.php";
             <label for="file" class="label-file">Choisir une image</label>
             <input id="file" name="productPicture" class="input-file" type="file">
 
-    </article>
-    <div class="catalogue_products_wrap back">
-    <article class="article_products_display">
-        <a href="#" class="article_img_link"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
+
+        <a href="#" class="article_img_link_bis"><img src="http://lorempixel.com/output/city-q-c-250-175-4.jpg" /></a>
         <div class="article_products_display_details">
           <p class="article_products_display_details_title">Nom de l'article</p>
           <input class="back_input_name" required type="text" name="productName" value="<?php echo $currentProduct['name']; ?>">
@@ -100,9 +98,7 @@ include "../../Class/Functions.php";
           }?>
 
             <button id='button'>Modifier</button>
-        </div>
     </article>
-    </div>
   </form>
 
 </section>

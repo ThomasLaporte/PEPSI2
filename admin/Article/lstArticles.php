@@ -4,8 +4,8 @@
     require_once "../../header.php";
     $lstFunctions = new Functions();
 
-    $content = "<br><h3>Liste des produits</h3>";
-    $content .=  "<table>";
+    $content = "<br><h3 class=\"title-list\">Liste des produits</h3>";
+    $content .=  "<table class=\"table-list\">";
 
     $content .=  "<tr>";
       $content .=  "<th></th>";
